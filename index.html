@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Position Trainer</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>LETTER TRAINER</h1>
+        <p class="subtitle">PIXEL EDITION v1.0</p>
+        
+        <div class="game-header">
+            <div class="level-display">
+                LEVEL <span class="level-number" id="levelDisplay">1</span>
+            </div>
+            <div class="hearts-container" id="heartsContainer">
+                <span class="heart">❤️</span>
+                <span class="heart">❤️</span>
+                <span class="heart">❤️</span>
+                <span class="heart">❤️</span>
+                <span class="heart">❤️</span>
+            </div>
+            <button class="pause-btn" id="pauseBtn">PAUSE</button>
+        </div>
+        
+        <div class="game-screen">
+            <div class="timer-display" id="timerDisplay">10</div>
+            <div class="particles" id="particles"></div>
+            <div class="position-display" id="positionDisplay">What position is this letter?</div>
+            <div class="letter-display" id="letterDisplay">?</div>
+            <div class="answer-display" id="answerDisplay"></div>
+        </div>
+        
+        <div class="controls">
+            <div class="options" id="optionsContainer">
+                <button class="option-btn" data-position="1">1st</button>
+                <button class="option-btn" data-position="2">2nd</button>
+                <button class="option-btn" data-position="3">3rd</button>
+                <button class="option-btn" data-position="4">4th</button>
+            </div>
+            
+            <button class="btn-generate" id="nextBtn">NEXT LETTER</button>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-label">CORRECT</div>
+                <div class="stat-value" id="correctCount" style="color: #68d391;">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">INCORRECT</div>
+                <div class="stat-value" id="incorrectCount" style="color: #fc8181;">0</div>
+            </div>
+            <div class="stat-item" style="grid-column: span 2;">
+                <div class="stat-label">AVG TIME</div>
+                <div class="stat-value" id="avgTime" style="color: #63b3ed;">--</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-overlay" id="menuOverlay">
+        <div class="menu-content" id="menuContent">
+            <!-- Pause menu content will be injected here -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
