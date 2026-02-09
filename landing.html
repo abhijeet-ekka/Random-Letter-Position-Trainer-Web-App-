@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Letter Position Trainer - Pixel Edition</title>
+    <meta name="description"
+        content="Train your brain to instantly recognize letter positions. Retro pixel gaming experience!">
+    <link rel="stylesheet" href="landing-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Pixel Stars Background -->
+    <div class="pixel-stars"></div>
+    <div class="scanlines"></div>
+
+    <!-- Arcade Header -->
+    <header class="arcade-header">
+        <div class="header-container">
+            <div class="arcade-logo">
+                <span class="logo-pixel">🎮</span>
+                <span class="logo-title">LETTER TRAINER</span>
+            </div>
+            <a href="index.html" class="pixel-btn btn-play">PLAY NOW</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-arcade">
+        <div class="hero-container">
+            <div class="hero-left">
+                <div class="insert-coin">
+                    <span class="coin-blink">★</span> PRESS START <span class="coin-blink">★</span>
+                </div>
+
+                <h1 class="title-arcade">
+                    MASTER THE
+                    <span class="title-highlight">ALPHABET</span>
+                </h1>
+
+                <p class="hero-text">
+                    Train your brain to instantly identify letter positions. Challenge yourself with timed levels and
+                    become an alphabet expert!
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="index.html" class="pixel-btn btn-start">
+                        ▶ START GAME
+                    </a>
+                    <button class="pixel-btn btn-info" onclick="scrollToFeatures()">
+                        ℹ LEARN MORE
+                    </button>
+                </div>
+
+                <div class="arcade-stats">
+                    <div class="stat-pixel">
+                        <div class="stat-num">26</div>
+                        <div class="stat-txt">LETTERS</div>
+                    </div>
+                    <div class="stat-pixel">
+                        <div class="stat-num">∞</div>
+                        <div class="stat-txt">LEVELS</div>
+                    </div>
+                    <div class="stat-pixel">
+                        <div class="stat-num">★★★</div>
+                        <div class="stat-txt">FUN</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="game-screen-preview">
+                    <div class="screen-border">
+                        <div class="screen-content">
+                            <div class="preview-hearts">
+                                ❤️ ❤️ ❤️ ❤️ ❤️
+                            </div>
+                            <div class="preview-letter" id="previewLetter">K</div>
+                            <div class="preview-question">WHAT POSITION?</div>
+                            <div class="preview-grid">
+                                <button class="preview-btn">8TH</button>
+                                <button class="preview-btn preview-correct">11TH</button>
+                                <button class="preview-btn">15TH</button>
+                                <button class="preview-btn">19TH</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-arcade" id="features">
+        <div class="section-container">
+            <div class="section-title-box">
+                <h2 class="section-title">GAME FEATURES</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="features-grid-pixel">
+                <div class="feature-box">
+                    <div class="feature-icon-pixel">🎯</div>
+                    <h3 class="feature-name">PROGRESSIVE LEVELS</h3>
+                    <p class="feature-desc">Start easy and level up through challenging stages</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-pixel">⏱️</div>
+                    <h3 class="feature-name">TIMED MODE</h3>
+                    <p class="feature-desc">Race against the clock to boost your speed</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-pixel">📊</div>
+                    <h3 class="feature-name">TRACK STATS</h3>
+                    <p class="feature-desc">Monitor accuracy and average response time</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-pixel">🎨</div>
+                    <h3 class="feature-name">PIXEL ART</h3>
+                    <p class="feature-desc">Retro gaming aesthetic with vibrant colors</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-pixel">🧠</div>
+                    <h3 class="feature-name">LEARN TRICKS</h3>
+                    <p class="feature-desc">Master mnemonic techniques for memory</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-pixel">💪</div>
+                    <h3 class="feature-name">BRAIN POWER</h3>
+                    <p class="feature-desc">Build mental agility and quick thinking</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Play Section -->
+    <section class="howto-arcade">
+        <div class="section-container">
+            <div class="section-title-box">
+                <h2 class="section-title">HOW TO PLAY</h2>
+                <div class="title-underline"></div>
+            </div>
+
+            <div class="steps-pixel">
+                <div class="step-box">
+                    <div class="step-badge">STEP 1</div>
+                    <h3 class="step-name">CHOOSE MODE</h3>
+                    <p class="step-info">Learn tricks or jump into gameplay</p>
+                </div>
+
+                <div class="step-arrow">▶</div>
+
+                <div class="step-box">
+                    <div class="step-badge">STEP 2</div>
+                    <h3 class="step-name">ANSWER FAST</h3>
+                    <p class="step-info">Identify letter positions quickly</p>
+                </div>
+
+                <div class="step-arrow">▶</div>
+
+                <div class="step-box">
+                    <div class="step-badge">STEP 3</div>
+                    <h3 class="step-name">LEVEL UP</h3>
+                    <p class="step-info">Track stats and become an expert</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="cta-arcade">
+        <div class="cta-box">
+            <div class="cta-flash">GAME READY</div>
+            <h2 class="cta-title">READY PLAYER ONE?</h2>
+            <p class="cta-subtitle">Start training your brain now!</p>
+            <a href="index.html" class="pixel-btn btn-giant">
+                ▶ INSERT COIN TO START
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-arcade">
+        <div class="footer-container">
+            <div class="footer-logo">🎮 LETTER TRAINER</div>
+            <p class="footer-tagline">ENHANCE YOUR BRAIN POWER</p>
+            <p class="footer-copy">© 2026 PIXEL EDITION v2.0</p>
+        </div>
+    </footer>
+
+    <script src="landing-script.js"></script>
+</body>
+
+</html>
