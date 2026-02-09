@@ -19,6 +19,16 @@ let gameStarted = false;
 let highestScore = 0;
 let hasShownHighScoreNotification = false;
 
+// User Data State
+let userData = {
+    username: 'Player',
+    totalGames: 0,
+    totalCorrect: 0,
+    totalIncorrect: 0,
+    totalTime: 0,
+    highScore: 0
+};
+
 // Save User Data
 function saveUserData() {
     localStorage.setItem('letterTrainerData', JSON.stringify(userData));
@@ -66,15 +76,7 @@ const musicBtn = document.getElementById('musicBtn');
 const endBtn = document.getElementById('endBtn');
 const homeBtn = document.getElementById('homeBtn');
 
-// User Data State
-let userData = {
-    username: 'Player',
-    totalGames: 0,
-    totalCorrect: 0,
-    totalIncorrect: 0,
-    totalTime: 0,
-    highScore: 0
-};
+
 
 // Audio elements
 const bgMusic = document.getElementById('bgMusic');
@@ -151,7 +153,7 @@ function endGame() {
     stopTimer();
     gameOver();
 }
-}
+
 
 function goHome() {
     if (gameStarted && !isGameOver) {
