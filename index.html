@@ -24,7 +24,12 @@
                 <span class="heart">❤️</span>
                 <span class="heart">❤️</span>
             </div>
-            <button class="pause-btn" id="pauseBtn">PAUSE</button>
+            <div class="header-buttons">
+                <button class="music-btn" id="musicBtn" title="Toggle Music">🔊</button>
+                <button class="home-btn" id="homeBtn" title="Go Home">🏠</button>
+                <button class="pause-btn" id="pauseBtn">PAUSE</button>
+                <button class="end-btn" id="endBtn">END GAME</button>
+            </div>
         </div>
 
         <div class="game-screen">
@@ -73,11 +78,27 @@
                 <div class="start-subtitle">PIXEL EDITION v2.0</div>
                 <div class="mode-buttons">
                     <button class="mode-btn" onclick="showLearnPage()">📚 LEARN TRICKS</button>
+                    <button class="mode-btn" onclick="showProfile()">👤 PROFILE</button>
                     <button class="mode-btn secondary" onclick="startGame()">🎮 PLAY GAME</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Audio Elements -->
+    <audio id="bgMusic" loop preload="auto">
+        <!-- Using a royalty-free chiptune track URL - you can replace with your own -->
+        <source src="https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="correctSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-win-2016.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="wrongSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="levelUpSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3" type="audio/mpeg">
+    </audio>
 
     <script src="script.js"></script>
 </body>

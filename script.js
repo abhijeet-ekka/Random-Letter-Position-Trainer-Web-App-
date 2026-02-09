@@ -19,26 +19,31 @@ let gameStarted = false;
 let highestScore = 0;
 let hasShownHighScoreNotification = false;
 
-// Load highest score from localStorage
-function loadHighestScore() {
-    const saved = localStorage.getItem('letterTrainerHighScore');
-    highestScore = saved ? parseInt(saved) : 0;
+// Save User Data
+function saveUserData() {
+    localStorage.setItem('letterTrainerData', JSON.stringify(userData));
 }
 
-// Save highest score to localStorage
-function saveHighestScore(score) {
-    if (score > highestScore) {
-        highestScore = score;
-        localStorage.setItem('letterTrainerHighScore', highestScore);
-        // Update display if element exists
-        const display = document.getElementById('highestScoreDisplay');
-        if (display) display.textContent = highestScore;
-        return true; // New high score!
+// Load User Data
+function loadUserData() {
+    const saved = localStorage.getItem('letterTrainerData');
+    if (saved) {
+        userData = { ...userData, ...JSON.parse(saved) };
+        // Sync high score
+        highestScore = Math.max(highestScore, userData.highScore);
+    } else {
+        // Fallback to old high score mechanisms if needed, but primarily use userData
+        const oldSaved = localStorage.getItem('letterTrainerHighScore');
+        if (oldSaved) {
+            highestScore = parseInt(oldSaved);
+            userData.highScore = highestScore;
+        }
     }
-    return false;
 }
 
-loadHighestScore();
+loadUserData();
+
+
 
 const nextBtn = document.getElementById('nextBtn');
 const letterDisplay = document.getElementById('letterDisplay');
@@ -57,9 +62,175 @@ const gameContainer = document.getElementById('gameContainer');
 const particlesContainer = document.getElementById('particles');
 const optionsContainer = document.getElementById('optionsContainer');
 const highestScoreDisplay = document.getElementById('highestScoreDisplay');
+const musicBtn = document.getElementById('musicBtn');
+const endBtn = document.getElementById('endBtn');
+const homeBtn = document.getElementById('homeBtn');
+
+// User Data State
+let userData = {
+    username: 'Player',
+    totalGames: 0,
+    totalCorrect: 0,
+    totalIncorrect: 0,
+    totalTime: 0,
+    highScore: 0
+};
+
+// Audio elements
+const bgMusic = document.getElementById('bgMusic');
+const correctSound = document.getElementById('correctSound');
+const wrongSound = document.getElementById('wrongSound');
+const levelUpSound = document.getElementById('levelUpSound');
+
+// Music state
+let isMusicPlaying = false;
 
 // Initialize highest score display
 if (highestScoreDisplay) highestScoreDisplay.textContent = highestScore;
+
+// Load music preference
+const musicPref = localStorage.getItem('letterTrainerMusic');
+if (musicPref === 'true') {
+    // Music will be started on first user interaction
+    isMusicPlaying = true;
+    musicBtn.classList.remove('muted');
+} else {
+    musicBtn.classList.add('muted');
+}
+
+// Music control functions
+function toggleMusic() {
+    if (isMusicPlaying) {
+        bgMusic.pause();
+        isMusicPlaying = false;
+        musicBtn.classList.add('muted');
+        musicBtn.textContent = '🔇';
+        localStorage.setItem('letterTrainerMusic', 'false');
+    } else {
+        bgMusic.play().catch(e => console.log('Audio play failed:', e));
+        isMusicPlaying = true;
+        musicBtn.classList.remove('muted');
+        musicBtn.textContent = '🔊';
+        localStorage.setItem('letterTrainerMusic', 'true');
+    }
+}
+
+function playSound(type) {
+    if (!isMusicPlaying) return;
+
+    let sound;
+    switch (type) {
+        case 'correct':
+            sound = correctSound;
+            break;
+        case 'wrong':
+            sound = wrongSound;
+            break;
+        case 'levelup':
+            sound = levelUpSound;
+            break;
+    }
+
+    if (sound) {
+        sound.currentTime = 0;
+        sound.volume = 0.3;
+        sound.play().catch(e => console.log('Sound play failed:', e));
+    }
+}
+
+// End game function
+function endGame() {
+    if (isGameOver) return;
+
+    // Confirmation dialog
+    if (!confirm('Are you sure you want to end this game? Your current progress will be lost.')) {
+        return;
+    }
+
+    isGameOver = true;
+    stopTimer();
+    gameOver();
+}
+}
+
+function goHome() {
+    if (gameStarted && !isGameOver) {
+        if (!confirm('Return to main menu? Progress will be lost.')) {
+            return;
+        }
+    }
+
+    stopTimer();
+    isGameOver = true; // Prevents loops
+    isPaused = false;
+    gameStarted = false;
+
+    gameContainer.classList.add('hidden');
+    showStartScreen();
+}
+
+function showProfile() {
+    const accuracy = (userData.totalCorrect + userData.totalIncorrect) > 0
+        ? ((userData.totalCorrect / (userData.totalCorrect + userData.totalIncorrect)) * 100).toFixed(1)
+        : 0;
+
+    const avgSpeed = userData.totalCorrect > 0
+        ? (userData.totalTime / userData.totalCorrect / 1000).toFixed(2)
+        : 0;
+
+    menuContent.innerHTML = `
+        <div class="profile-card">
+            <div class="profile-header">
+                <div class="profile-avatar">👤</div>
+                <input type="text" class="profile-name-input" id="usernameInput" value="${userData.username}" maxlength="12" placeholder="ENTER NAME">
+            </div>
+            
+            <div class="profile-stats-grid">
+                <div class="profile-stat-box">
+                    <span class="p-stat-label">HIGH SCORE</span>
+                    <span class="p-stat-value gold">⭐ ${userData.highScore}</span>
+                </div>
+                <div class="profile-stat-box">
+                    <span class="p-stat-label">GAMES PLAYED</span>
+                    <span class="p-stat-value">${userData.totalGames}</span>
+                </div>
+                <div class="profile-stat-box">
+                    <span class="p-stat-label">TOTAL ACCURACY</span>
+                    <span class="p-stat-value green">${accuracy}%</span>
+                </div>
+                <div class="profile-stat-box">
+                    <span class="p-stat-label">AVG SPEED</span>
+                    <span class="p-stat-value blue">⚡ ${avgSpeed}s</span>
+                </div>
+                <div class="profile-stat-box">
+                    <span class="p-stat-label">TOTAL CORRECT</span>
+                    <span class="p-stat-value">${userData.totalCorrect}</span>
+                </div>
+            </div>
+            
+            <button class="menu-btn" onclick="saveProfileName(); showStartScreen()">⬅ BACK</button>
+        </div>
+    `;
+
+    // Add event listener for auto-saving name on change
+    setTimeout(() => {
+        const input = document.getElementById('usernameInput');
+        if (input) {
+            input.addEventListener('change', saveProfileName);
+            input.addEventListener('blur', saveProfileName);
+        }
+    }, 100);
+
+    menuOverlay.classList.add('active');
+}
+
+function saveProfileName() {
+    const input = document.getElementById('usernameInput');
+    if (input) {
+        userData.username = input.value.trim() || 'Player';
+        saveUserData();
+    }
+}
 
 // Function to show high score beat notification
 function showHighScoreBeatNotification() {
@@ -192,6 +363,11 @@ function startGame() {
     gameContainer.classList.remove('hidden');
     menuOverlay.classList.remove('active');
 
+    // Start music if enabled
+    if (musicPref === 'true' && !isMusicPlaying) {
+        toggleMusic();
+    }
+
     if (isGameOver) {
         restartGame();
     } else {
@@ -266,6 +442,8 @@ function updateLevel() {
         positionDisplay.textContent = `🎉 LEVEL ${level} UNLOCKED! 🎉`;
         positionDisplay.style.color = '#ffd700';
 
+        playSound('levelup');
+
         setTimeout(() => {
             if (!isGameOver && !isPaused) {
                 positionDisplay.textContent = 'What position is this letter?';
@@ -289,7 +467,18 @@ function gameOver() {
     stopTimer();
 
     const accuracy = totalAnswers > 0 ? ((correctCount / totalAnswers) * 100).toFixed(1) : 0;
-    const isNewHighScore = saveHighestScore(correctCount);
+
+    // Update Profile Stats
+    userData.totalGames++;
+
+    let isNewHighScore = false;
+    if (correctCount > userData.highScore) {
+        userData.highScore = correctCount;
+        highestScore = correctCount;
+        isNewHighScore = true;
+    }
+
+    saveUserData();
 
     menuContent.innerHTML = `
                 <div class="game-over-screen">
@@ -455,9 +644,15 @@ function handleTimeout() {
     answerDisplay.textContent = `⏱ TIME UP! ${currentLetter} is the ${getOrdinal(currentPosition)} letter`;
     answerDisplay.style.color = '#f6ad55';
 
+    playSound('wrong');
+
     loseLife();
     incorrectCount++;
     incorrectCountEl.textContent = incorrectCount;
+
+    // Update stats
+    userData.totalIncorrect++;
+    saveUserData();
 
     // Auto advance after 1.5 seconds
     setTimeout(() => {
@@ -543,6 +738,10 @@ function handleOptionClick(e) {
     totalTime += timeTaken;
     totalAnswers++;
 
+    // Update cumulative stats
+    userData.totalTime += timeTaken;
+    saveUserData();
+
     // Disable all buttons
     const allButtons = optionsContainer.querySelectorAll('.option-btn');
     allButtons.forEach(btn => btn.disabled = true);
@@ -552,6 +751,12 @@ function handleOptionClick(e) {
         selectedBtn.classList.add('correct');
         answerDisplay.textContent = `✓ CORRECT! ${currentLetter} is the ${getOrdinal(currentPosition)} letter`;
         answerDisplay.style.color = '#68d391';
+
+        // Update stats
+        userData.totalCorrect++;
+        saveUserData();
+
+        playSound('correct');
         correctCount++;
         correctCountEl.textContent = correctCount;
 
@@ -595,6 +800,8 @@ function handleOptionClick(e) {
         answerDisplay.textContent = `✗ WRONG! ${currentLetter} is the ${getOrdinal(currentPosition)} letter`;
         answerDisplay.style.color = '#fc8181';
 
+        playSound('wrong');
+
         loseLife();
         incorrectCount++;
         incorrectCountEl.textContent = incorrectCount;
@@ -619,6 +826,10 @@ optionsContainer.addEventListener('click', (e) => {
 });
 
 pauseBtn.addEventListener('click', togglePause);
+musicBtn.addEventListener('click', toggleMusic);
+
+endBtn.addEventListener('click', endGame);
+homeBtn.addEventListener('click', goHome);
 
 nextBtn.addEventListener('click', () => {
     if (answered && !isGameOver) {
@@ -649,9 +860,4 @@ document.addEventListener('keydown', (e) => {
 // Make functions global for onclick handlers
 window.togglePause = togglePause;
 window.restartGame = restartGame;
-window.showLearnPage = showLearnPage;
-window.showStartScreen = showStartScreen;
-window.startGame = startGame;
-
-// Don't auto-start the game anymore
 // generateNewQuestion();
