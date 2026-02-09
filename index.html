@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Letter Position Trainer</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <div class="container hidden" id="gameContainer">
         <h1>LETTER TRAINER</h1>
         <p class="subtitle">PIXEL EDITION v1.0</p>
-        
+
         <div class="game-header">
             <div class="level-display">
                 LEVEL <span class="level-number" id="levelDisplay">1</span>
@@ -24,7 +26,7 @@
             </div>
             <button class="pause-btn" id="pauseBtn">PAUSE</button>
         </div>
-        
+
         <div class="game-screen">
             <div class="timer-display" id="timerDisplay">10</div>
             <div class="particles" id="particles"></div>
@@ -32,7 +34,7 @@
             <div class="letter-display" id="letterDisplay">?</div>
             <div class="answer-display" id="answerDisplay"></div>
         </div>
-        
+
         <div class="controls">
             <div class="options" id="optionsContainer">
                 <button class="option-btn" data-position="1">1st</button>
@@ -40,10 +42,10 @@
                 <button class="option-btn" data-position="3">3rd</button>
                 <button class="option-btn" data-position="4">4th</button>
             </div>
-            
+
             <button class="btn-generate" id="nextBtn">NEXT LETTER</button>
         </div>
-        
+
         <div class="stats">
             <div class="stat-item">
                 <div class="stat-label">CORRECT</div>
@@ -53,7 +55,11 @@
                 <div class="stat-label">INCORRECT</div>
                 <div class="stat-value" id="incorrectCount" style="color: #fc8181;">0</div>
             </div>
-            <div class="stat-item" style="grid-column: span 2;">
+            <div class="stat-item">
+                <div class="stat-label">HIGH SCORE</div>
+                <div class="stat-value" id="highestScoreDisplay" style="color: #ffd700;">0</div>
+            </div>
+            <div class="stat-item">
                 <div class="stat-label">AVG TIME</div>
                 <div class="stat-value" id="avgTime" style="color: #63b3ed;">--</div>
             </div>
@@ -75,4 +81,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
