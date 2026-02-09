@@ -17,6 +17,7 @@ let isPaused = false;
 let isGameOver = false;
 let gameStarted = false;
 let highestScore = 0;
+let hasShownHighScoreNotification = false;
 
 // Load highest score from localStorage
 function loadHighestScore() {
@@ -389,6 +390,7 @@ function restartGame() {
     baseTimeLimit = 10;
     isGameOver = false;
     isPaused = false;
+    hasShownHighScoreNotification = false;  // Reset notification flag
 
     // Update displays
     levelDisplay.textContent = level;
@@ -553,9 +555,10 @@ function handleOptionClick(e) {
         correctCount++;
         correctCountEl.textContent = correctCount;
 
-        // Check if player just beat their previous high score
-        if (correctCount > highestScore && highestScore > 0) {
+        // Check if player just beat their previous high score (only show once)
+        if (correctCount > highestScore && highestScore > 0 && !hasShownHighScoreNotification) {
             showHighScoreBeatNotification();
+            hasShownHighScoreNotification = true;
         }
 
         // Particles effect
