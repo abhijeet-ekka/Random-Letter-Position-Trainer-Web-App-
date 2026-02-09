@@ -15,6 +15,7 @@
         let totalAnswers = 0;
         let isPaused = false;
         let isGameOver = false;
+        let gameStarted = false;
         
         const nextBtn = document.getElementById('nextBtn');
         const letterDisplay = document.getElementById('letterDisplay');
@@ -29,8 +30,122 @@
         const pauseBtn = document.getElementById('pauseBtn');
         const menuOverlay = document.getElementById('menuOverlay');
         const menuContent = document.getElementById('menuContent');
+        const gameContainer = document.getElementById('gameContainer');
         const particlesContainer = document.getElementById('particles');
         const optionsContainer = document.getElementById('optionsContainer');
+        
+        // Function to get opposite letter (A↔Z, B↔Y, etc.)
+        function getOppositeLetter(letter) {
+            const index = alphabet.indexOf(letter);
+            const oppositeIndex = 25 - index;
+            return alphabet[oppositeIndex];
+        }
+        
+        // Function to show learn page
+        function showLearnPage() {
+            const alphabetItems = alphabet.split('').map((letter, index) => {
+                const position = index + 1;
+                const opposite = getOppositeLetter(letter);
+                return `
+                    <div class="alphabet-item">
+                        <span class="alphabet-letter">${letter}</span>
+                        <div class="alphabet-position">${position}${getOrdinalSuffix(position)}</div>
+                        <div class="alphabet-opposite">↔ ${opposite}</div>
+                    </div>
+                `;
+            }).join('');
+            
+            menuContent.innerHTML = `
+                <div class="learn-page">
+                    <h3 style="font-size: 20px; color: #ffd700; text-align: center; margin-bottom: 20px;">LEARN LETTER POSITIONS</h3>
+                    
+                    <div class="learn-section">
+                        <h3>📋 Complete Alphabet</h3>
+                        <div class="alphabet-grid">
+                            ${alphabetItems}
+                        </div>
+                    </div>
+                    
+                    <div class="learn-section">
+                        <h3>🎯 Memory Tricks</h3>
+                        
+                        <div class="trick-box">
+                            <div class="trick-title">1. Opposite Letter Trick</div>
+                            <div class="trick-content">
+                                A↔Z, B↔Y, C↔X, D↔W, etc.<br>
+                                If you know A is 1st, then Z is 26th.<br>
+                                If B is 2nd, then Y is 25th.<br>
+                                The positions always add up to 27!
+                            </div>
+                        </div>
+                        
+                        <div class="trick-box">
+                            <div class="trick-title">2. Split in Half</div>
+                            <div class="trick-content">
+                                First half: A-M (1-13)<br>
+                                Second half: N-Z (14-26)<br>
+                                M is 13th (middle), N is 14th
+                            </div>
+                        </div>
+                        
+                        <div class="trick-box">
+                            <div class="trick-title">3. Quarter Points</div>
+                            <div class="trick-content">
+                                A=1, G=7 (≈1/4), M=13 (1/2), S=19 (≈3/4), Z=26<br>
+                                Use these as anchor points!
+                            </div>
+                        </div>
+                        
+                        <div class="trick-box">
+                            <div class="trick-title">4. Common Patterns</div>
+                            <div class="trick-content">
+                                EJOTY: 5, 10, 15, 20, 25 (multiples of 5)<br>
+                                Remember these and count from them!
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-buttons" style="margin-top: 20px;">
+                        <button class="menu-btn" onclick="showStartScreen()">⬅ BACK</button>
+                        <button class="menu-btn secondary" onclick="startGame()">🎮 PLAY NOW</button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        function getOrdinalSuffix(n) {
+            const s = ["th", "st", "nd", "rd"];
+            const v = n % 100;
+            return (s[(v - 20) % 10] || s[v] || s[0]);
+        }
+        
+        // Function to show start screen
+        function showStartScreen() {
+            menuContent.innerHTML = `
+                <div class="start-screen">
+                    <div class="start-title">LETTER TRAINER</div>
+                    <div class="start-subtitle">PIXEL EDITION v2.0</div>
+                    <div class="mode-buttons">
+                        <button class="mode-btn" onclick="showLearnPage()">📚 LEARN TRICKS</button>
+                        <button class="mode-btn secondary" onclick="startGame()">🎮 PLAY GAME</button>
+                    </div>
+                </div>
+            `;
+            menuOverlay.classList.add('active');
+        }
+        
+        // Function to start the game
+        function startGame() {
+            gameStarted = true;
+            gameContainer.classList.remove('hidden');
+            menuOverlay.classList.remove('active');
+            
+            if (isGameOver) {
+                restartGame();
+            } else {
+                generateNewQuestion();
+            }
+        }
         
         // Create background stars
         function createStars() {
@@ -469,6 +584,9 @@
         // Make functions global for onclick handlers
         window.togglePause = togglePause;
         window.restartGame = restartGame;
+        window.showLearnPage = showLearnPage;
+        window.showStartScreen = showStartScreen;
+        window.startGame = startGame;
         
-        // Initialize with first question
-        generateNewQuestion();
+        // Don't auto-start the game anymore
+        // generateNewQuestion();

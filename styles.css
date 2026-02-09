@@ -1,4 +1,4 @@
-       @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
         
         * {
             margin: 0;
@@ -29,6 +29,10 @@
             padding: 30px;
             image-rendering: pixelated;
             position: relative;
+        }
+        
+        .container.hidden {
+            display: none;
         }
         
         .container::before {
@@ -169,12 +173,16 @@
             padding: 15px;
             background: #1a202c;
             border: 3px solid #4a5568;
+            flex-wrap: wrap;
+            gap: 10px;
         }
         
         .level-display {
             font-size: 14px;
             color: #ffd700;
             text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+            flex: 1;
+            min-width: 80px;
         }
         
         .level-number {
@@ -185,6 +193,8 @@
         .hearts-container {
             display: flex;
             gap: 8px;
+            flex: 1;
+            justify-content: center;
         }
         
         .heart {
@@ -212,6 +222,35 @@
             border: 3px solid #dd6b20;
             cursor: pointer;
             box-shadow: 0 4px 0 #c05621;
+            flex-shrink: 0;
+        }
+        
+        @media (max-width: 600px) {
+            .game-header {
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .level-display,
+            .hearts-container,
+            .pause-btn {
+                flex: 1 1 100%;
+                justify-content: center;
+            }
+            
+            .hearts-container {
+                order: 1;
+                margin: 10px 0;
+            }
+            
+            .level-display {
+                order: 0;
+            }
+            
+            .pause-btn {
+                order: 2;
+                width: 100%;
+            }
         }
         
         .pause-btn:hover {
@@ -339,6 +378,142 @@
         
         .menu-btn.restart:active {
             box-shadow: 0 2px 0 #c53030;
+        }
+        
+        .start-screen {
+            text-align: center;
+        }
+        
+        .start-title {
+            font-size: 28px;
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-shadow: 3px 3px 0 #ff69b4;
+        }
+        
+        .start-subtitle {
+            font-size: 10px;
+            color: #a0aec0;
+            margin-bottom: 30px;
+        }
+        
+        .mode-buttons {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .mode-btn {
+            padding: 20px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+            background: #4299e1;
+            color: #1a202c;
+            border: 3px solid #3182ce;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #2c5282;
+            transition: all 0.1s;
+        }
+        
+        .mode-btn:hover {
+            background: #63b3ed;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #2c5282;
+        }
+        
+        .mode-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #2c5282;
+        }
+        
+        .mode-btn.secondary {
+            background: #48bb78;
+            border-color: #38a169;
+            box-shadow: 0 4px 0 #2f855a;
+        }
+        
+        .mode-btn.secondary:hover {
+            background: #68d391;
+            box-shadow: 0 6px 0 #2f855a;
+        }
+        
+        .mode-btn.secondary:active {
+            box-shadow: 0 2px 0 #2f855a;
+        }
+        
+        .learn-page {
+            max-height: 60vh;
+            overflow-y: auto;
+            text-align: left;
+        }
+        
+        .learn-section {
+            margin-bottom: 25px;
+        }
+        
+        .learn-section h3 {
+            font-size: 14px;
+            color: #ffd700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+        }
+        
+        .learn-section p {
+            font-size: 9px;
+            color: #e2e8f0;
+            line-height: 1.8;
+            margin-bottom: 12px;
+        }
+        
+        .trick-box {
+            background: #1a202c;
+            padding: 15px;
+            border: 3px solid #4a5568;
+            margin-bottom: 15px;
+        }
+        
+        .trick-title {
+            font-size: 11px;
+            color: #63b3ed;
+            margin-bottom: 10px;
+        }
+        
+        .trick-content {
+            font-size: 9px;
+            color: #cbd5e0;
+            line-height: 1.6;
+        }
+        
+        .alphabet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: 8px;
+            margin: 15px 0;
+        }
+        
+        .alphabet-item {
+            background: #1a202c;
+            padding: 10px;
+            border: 2px solid #4a5568;
+            text-align: center;
+        }
+        
+        .alphabet-letter {
+            font-size: 16px;
+            color: #ffd700;
+            display: block;
+            margin-bottom: 5px;
+        }
+        
+        .alphabet-position {
+            font-size: 8px;
+            color: #63b3ed;
+        }
+        
+        .alphabet-opposite {
+            font-size: 8px;
+            color: #f687b3;
+            margin-top: 5px;
         }
         
         .game-over-screen {

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container hidden" id="gameContainer">
         <h1>LETTER TRAINER</h1>
         <p class="subtitle">PIXEL EDITION v1.0</p>
         
@@ -60,9 +60,16 @@
         </div>
     </div>
 
-    <div class="menu-overlay" id="menuOverlay">
+    <div class="menu-overlay active" id="menuOverlay">
         <div class="menu-content" id="menuContent">
-            <!-- Pause menu content will be injected here -->
+            <div class="start-screen">
+                <div class="start-title">LETTER TRAINER</div>
+                <div class="start-subtitle">PIXEL EDITION v2.0</div>
+                <div class="mode-buttons">
+                    <button class="mode-btn" onclick="showLearnPage()">📚 LEARN TRICKS</button>
+                    <button class="mode-btn secondary" onclick="startGame()">🎮 PLAY GAME</button>
+                </div>
+            </div>
         </div>
     </div>
 
