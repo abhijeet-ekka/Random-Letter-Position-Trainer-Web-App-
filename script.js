@@ -60,6 +60,31 @@ const highestScoreDisplay = document.getElementById('highestScoreDisplay');
 // Initialize highest score display
 if (highestScoreDisplay) highestScoreDisplay.textContent = highestScore;
 
+// Function to show high score beat notification
+function showHighScoreBeatNotification() {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = 'high-score-notification';
+    notification.innerHTML = `
+        <div class="high-score-notification-content">
+            <div class="high-score-notification-icon">🏆</div>
+            <div class="high-score-notification-text">NEW HIGH SCORE!</div>
+            <div class="high-score-notification-subtext">You beat your record!</div>
+        </div>
+    `;
+
+    document.body.appendChild(notification);
+
+    // Trigger animation
+    setTimeout(() => notification.classList.add('show'), 10);
+
+    // Remove after 3 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 500);
+    }, 3000);
+}
+
 // Function to get opposite letter (A↔Z, B↔Y, etc.)
 function getOppositeLetter(letter) {
     const index = alphabet.indexOf(letter);
@@ -527,6 +552,11 @@ function handleOptionClick(e) {
         answerDisplay.style.color = '#68d391';
         correctCount++;
         correctCountEl.textContent = correctCount;
+
+        // Check if player just beat their previous high score
+        if (correctCount > highestScore && highestScore > 0) {
+            showHighScoreBeatNotification();
+        }
 
         // Particles effect
         const rect = selectedBtn.getBoundingClientRect();
