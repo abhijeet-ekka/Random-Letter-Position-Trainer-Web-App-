@@ -150,3 +150,91 @@ if (!document.getElementById('pixel-trail-styles')) {
     `;
     document.head.appendChild(style);
 }
+
+// ========================================
+// CAROUSEL FUNCTIONALITY
+// ========================================
+let currentSlide = 0;
+const totalSlides = 4;
+
+function moveCarousel(direction) {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.dot');
+
+    // Remove active class from current slide
+    slides[currentSlide].classList.remove('active');
+    slides[currentSlide].classList.add('prev');
+    dots[currentSlide].classList.remove('active');
+
+    // Calculate new slide index
+    currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+
+    // Add active class to new slide
+    setTimeout(() => {
+        slides.forEach(slide => slide.classList.remove('prev'));
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.add('active');
+    }, 100);
+}
+
+function jumpToSlide(index) {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('. dot');
+
+    // Remove active class from current slide
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+
+    // Set new slide
+    currentSlide = index;
+
+    // Add active class to new slide
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+}
+
+// Auto-rotate carousel every 5 seconds
+setInterval(() => {
+    moveCarousel(1);
+}, 5000);
+
+// ========================================
+// ANIMATED COUNTERS FOR METRICS
+// ========================================
+function animateCounter(element, target, duration = 2000) {
+    const start = 0;
+    const increment = target / (duration / 16); // 60fps
+    let current = start;
+
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = target.toLocaleString();
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.floor(current).toLocaleString();
+        }
+    }, 16);
+}
+
+// Trigger counters when metrics section is visible
+const metricsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const metricNumbers = entry.target.querySelectorAll('.metric-number');
+            metricNumbers.forEach(number => {
+                const target = parseInt(number.dataset.count);
+                animateCounter(number, target);
+            });
+            metricsObserver.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.3 });
+
+// Observe metrics section when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    const metricsSection = document.querySelector('.metrics-arcade');
+    if (metricsSection) {
+        metricsObserver.observe(metricsSection);
+    }
+});

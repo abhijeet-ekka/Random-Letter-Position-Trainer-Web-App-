@@ -584,6 +584,457 @@ body {
 }
 
 /* ========================================
+   EXAM CAROUSEL SECTION
+   ======================================== */
+.exam-carousel-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    border-top: 4px solid #4a5568;
+    border-bottom: 4px solid #4a5568;
+}
+
+.section-desc {
+    font-size: 0.8rem;
+    color: #cbd5e0;
+    margin-top: 1rem;
+}
+
+.carousel-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.carousel-track {
+    overflow: hidden;
+    position: relative;
+    min-height: 450px;
+}
+
+.carousel-slide {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    position: relative;
+    pointer-events: auto;
+}
+
+.carousel-slide.prev {
+    transform: translateX(-100%);
+}
+
+.exam-card {
+    background: #2d3748;
+    border: 4px solid #4a5568;
+    padding: 3rem 2rem;
+    text-align: center;
+    box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.3);
+    animation: cardSlide 0.5s ease-out;
+}
+
+@keyframes cardSlide {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.exam-badge {
+    background: #f56565;
+    color: #1a202c;
+    font-size: 0.7rem;
+    padding: 0.5rem 1.5rem;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    border: 3px solid #1a202c;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.exam-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    animation: examIconFloat 3s ease-in-out infinite;
+}
+
+@keyframes examIconFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.exam-title {
+    font-size: 1.3rem;
+    color: #ffd700;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.exam-benefits {
+    list-style: none;
+    text-align: left;
+    max-width: 500px;
+    margin: 0 auto 2rem;
+}
+
+.exam-benefits li {
+    font-size: 0.75rem;
+    color: #e2e8f0;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    background: #1a202c;
+    border-left: 4px solid #63b3ed;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.exam-stat {
+    background: #4299e1;
+    color: #1a202c;
+    font-size: 0.7rem;
+    padding: 0.75rem 1.5rem;
+    display: inline-block;
+    border: 3px solid #1a202c;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.carousel-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.carousel-btn {
+    font-family: 'Press Start 2P', cursive;
+    background: #4299e1;
+    color: #1a202c;
+    border: 4px solid #3182ce;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #2c5282, 0 8px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.1s;
+}
+
+.carousel-btn:hover {
+    background: #63b3ed;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #2c5282, 0 10px 0 rgba(0, 0, 0, 0.3);
+}
+
+.carousel-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #2c5282, 0 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.carousel-dots {
+    display: flex;
+    gap: 1rem;
+}
+
+.dot {
+    width: 16px;
+    height: 16px;
+    background: #4a5568;
+    border: 3px solid #718096;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dot:hover {
+    background: #63b3ed;
+    border-color: #4299e1;
+}
+
+.dot.active {
+    background: #ffd700;
+    border-color: #ff69b4;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3), 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* ========================================
+   SUCCESS METRICS SECTION
+   ======================================== */
+.metrics-arcade {
+    padding: 4rem 2rem;
+    background: #1a202c;
+    border-top: 4px solid #4a5568;
+    border-bottom: 4px solid #4a5568;
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.metric-box {
+    background: #2d3748;
+    border: 4px solid #4a5568;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+}
+
+.metric-box:hover {
+    transform: translateY(-8px);
+    box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.3);
+    border-color: #ffd700;
+}
+
+.metric-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: metricBounce 2s ease-in-out infinite;
+}
+
+@keyframes metricBounce {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.metric-number {
+    font-size: 3rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.metric-label {
+    font-size: 0.65rem;
+    color: #a0aec0;
+    letter-spacing: 1px;
+}
+
+/* ========================================
+   TESTIMONIALS SECTION
+   ======================================== */
+.testimonials-arcade {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-top: 4px solid #4a5568;
+    border-bottom: 4px solid #4a5568;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.testimonial-card {
+    background: #2d3748;
+    border: 4px solid #4a5568;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    position: relative;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 16px 16px 0 rgba(0, 0, 0, 0.3);
+    border-color: #ffd700;
+}
+
+.testimonial-badge {
+    background: #48bb78;
+    color: #1a202c;
+    font-size: 0.6rem;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    border: 3px solid #1a202c;
+    box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.testimonial-avatar {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+    animation: avatarFloat 3s ease-in-out infinite;
+}
+
+@keyframes avatarFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(5deg);
+    }
+}
+
+.testimonial-text {
+    font-size: 0.75rem;
+    color: #e2e8f0;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+    font-style: italic;
+    padding: 1.5rem;
+    background: #1a202c;
+    border-left: 4px solid #63b3ed;
+}
+
+.testimonial-author {
+    margin-top: 1.5rem;
+}
+
+.author-name {
+    font-size: 0.85rem;
+    color: #ffd700;
+    margin-bottom: 0.5rem;
+}
+
+.author-exam {
+    font-size: 0.65rem;
+    color: #63b3ed;
+}
+
+/* ========================================
+   BLOG SECTION
+   ======================================== */
+.blog-arcade {
+    padding: 4rem 2rem;
+    background: #1a202c;
+    border-top: 4px solid #4a5568;
+    border-bottom: 4px solid #4a5568;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.blog-card {
+    background: #2d3748;
+    border: 4px solid #4a5568;
+    padding: 2rem;
+    box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.3);
+    transition: all 0.3s;
+    cursor: pointer;
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 12px 12px 0 rgba(0, 0, 0, 0.3);
+    border-color: #ffd700;
+}
+
+.blog-tag {
+    background: #4299e1;
+    color: #1a202c;
+    font-size: 0.6rem;
+    padding: 0.4rem 0.8rem;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    border: 3px solid #1a202c;
+    box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.blog-icon {
+    font-size: 3rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    animation: blogIconSpin 10s linear infinite;
+}
+
+@keyframes blogIconSpin {
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+.blog-card:hover .blog-icon {
+    animation: blogIconBounce 0.6s ease-in-out;
+}
+
+@keyframes blogIconBounce {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+}
+
+.blog-title {
+    font-size: 0.9rem;
+    color: #ffd700;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    min-height: 2.8rem;
+}
+
+.blog-excerpt {
+    font-size: 0.7rem;
+    color: #cbd5e0;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 0.65rem;
+    color: #a0aec0;
+    padding-top: 1rem;
+    border-top: 2px solid #4a5568;
+}
+
+.blog-date,
+.blog-views {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* ========================================
    HOW TO PLAY SECTION
    ======================================== */
 .howto-arcade {
