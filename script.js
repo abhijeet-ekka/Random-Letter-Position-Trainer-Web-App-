@@ -19,8 +19,13 @@ let gameStarted = false;
 let highestScore = 0;
 let hasShownHighScoreNotification = false;
 
-// Game Mode: 'position', 'opposite', 'alphabetmath', 'puremath'
-let gameMode = 'position';
+// Game Mode: 'alphabet', 'puremath'
+let gameMode = 'alphabet';
+
+// Alphabet Mode Settings
+let alphabetSettings = {
+    type: 'position' // 'position', 'opposite', 'alphabetmath', 'mixed'
+};
 
 // Math Mode Settings
 let mathSettings = {
@@ -67,8 +72,20 @@ function loadMathSettings() {
     }
 }
 
+function saveAlphabetSettings() {
+    localStorage.setItem('letterTrainerAlphabetSettings', JSON.stringify(alphabetSettings));
+}
+
+function loadAlphabetSettings() {
+    const saved = localStorage.getItem('letterTrainerAlphabetSettings');
+    if (saved) {
+        alphabetSettings = { ...alphabetSettings, ...JSON.parse(saved) };
+    }
+}
+
 loadUserData();
 loadMathSettings();
+loadAlphabetSettings();
 
 const nextBtn = document.getElementById('nextBtn');
 const letterDisplay = document.getElementById('letterDisplay');
@@ -319,6 +336,62 @@ function getOrdinalSuffix(n) {
     return (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
+function showAlphabetSettings() {
+    menuContent.innerHTML = `
+        <div class="math-settings">
+            <div class="menu-title">ALPHABET SETTINGS</div>
+            
+            <div class="settings-section">
+                <div class="settings-label">CHALLENGE TYPE</div>
+                <div class="settings-grid">
+                    <button class="settings-btn ${alphabetSettings.type === 'position' ? 'active' : ''}" onclick="setAlphabetType('position')">
+                        📍 POSITION
+                    </button>
+                    <button class="settings-btn ${alphabetSettings.type === 'opposite' ? 'active' : ''}" onclick="setAlphabetType('opposite')">
+                        🔄 OPPOSITE
+                    </button>
+                    <button class="settings-btn ${alphabetSettings.type === 'alphabetmath' ? 'active' : ''}" onclick="setAlphabetType('alphabetmath')" style="grid-column: span 2;">
+                        🔤 LETTER MATH
+                    </button>
+                    <button class="settings-btn ${alphabetSettings.type === 'mixed' ? 'active' : ''}" onclick="setAlphabetType('mixed')" style="grid-column: span 2;">
+                        🔀 MIXED
+                    </button>
+                </div>
+            </div>
+
+            <div class="settings-info">
+                <div class="info-box">
+                    <div class="info-title">📍 Position</div>
+                    <div class="info-text">Identify letter positions (A=1, B=2...Z=26)</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-title">🔄 Opposite</div>
+                    <div class="info-text">Find opposite letters (A↔Z, B↔Y)</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-title">🔤 Letter Math</div>
+                    <div class="info-text">Solve equations: A(1) + C(3) = ?</div>
+                </div>
+                <div class="info-box">
+                    <div class="info-title">🔀 Mixed</div>
+                    <div class="info-text">Random mix of all challenges</div>
+                </div>
+            </div>
+
+            <div class="menu-buttons" style="margin-top: 20px;">
+                <button class="menu-btn" onclick="showModeSelection()">⬅ BACK</button>
+                <button class="menu-btn secondary" onclick="selectGameMode('alphabet')">▶️ START</button>
+            </div>
+        </div>
+    `;
+}
+
+function setAlphabetType(type) {
+    alphabetSettings.type = type;
+    saveAlphabetSettings();
+    showAlphabetSettings();
+}
+
 function showMathSettings() {
     menuContent.innerHTML = `
         <div class="math-settings">
@@ -385,25 +458,11 @@ function showModeSelection() {
         <div class="mode-selection">
             <div class="menu-title">SELECT MODE</div>
             <div class="mode-grid">
-                <div class="game-mode-card" onclick="selectGameMode('position')">
-                    <div class="game-mode-title">📍 POSITION MODE</div>
+                <div class="game-mode-card" onclick="showAlphabetSettings()">
+                    <div class="game-mode-title">🔤 ALPHABET MODE</div>
                     <div class="game-mode-desc">
-                        Given a letter, identify its position (1-26).
-                        Classic training mode!
-                    </div>
-                </div>
-                <div class="game-mode-card" onclick="selectGameMode('opposite')">
-                    <div class="game-mode-title">🔄 OPPOSITE MODE</div>
-                    <div class="game-mode-desc">
-                        Given a letter, find its opposite (A↔Z, B↔Y).
-                        Master the reverse alphabet!
-                    </div>
-                </div>
-                <div class="game-mode-card" onclick="selectGameMode('alphabetmath')">
-                    <div class="game-mode-title">🔤 ALPHABET MATH</div>
-                    <div class="game-mode-desc">
-                        Letter operations: A(1) + C(3) = ?<br>
-                        Combine letters with math!
+                        Master letter positions, opposites, and letter math!<br>
+                        Includes: Position, Opposite, Letter Math & Mixed
                     </div>
                 </div>
                 <div class="game-mode-card" onclick="showMathSettings()">
@@ -442,13 +501,19 @@ function showStartScreen() {
 }
 
 function updateModeBadge() {
-    const modeNames = {
-        'position': 'POSITION',
-        'opposite': 'OPPOSITE',
-        'alphabetmath': 'ALPHABET MATH',
-        'puremath': 'MATH'
-    };
-    modeBadge.textContent = modeNames[gameMode] || 'POSITION';
+    let badgeText = '';
+    if (gameMode === 'alphabet') {
+        const typeNames = {
+            'position': 'POSITION',
+            'opposite': 'OPPOSITE',
+            'alphabetmath': 'LETTER MATH',
+            'mixed': 'ALPHABET MIX'
+        };
+        badgeText = typeNames[alphabetSettings.type] || 'ALPHABET';
+    } else if (gameMode === 'puremath') {
+        badgeText = 'MATH';
+    }
+    modeBadge.textContent = badgeText;
 }
 
 function startGame() {
@@ -705,12 +770,16 @@ function updateAverageTime() {
 }
 
 function updatePositionDisplayText() {
-    if (gameMode === 'position') {
-        positionDisplay.textContent = 'What position is this letter?';
-    } else if (gameMode === 'opposite') {
-        positionDisplay.textContent = 'What is the opposite letter?';
-    } else if (gameMode === 'alphabetmath') {
-        positionDisplay.textContent = 'Solve the alphabet equation:';
+    if (gameMode === 'alphabet') {
+        if (alphabetSettings.type === 'position') {
+            positionDisplay.textContent = 'What position is this letter?';
+        } else if (alphabetSettings.type === 'opposite') {
+            positionDisplay.textContent = 'What is the opposite letter?';
+        } else if (alphabetSettings.type === 'alphabetmath') {
+            positionDisplay.textContent = 'Solve the alphabet equation:';
+        } else if (alphabetSettings.type === 'mixed') {
+            positionDisplay.textContent = 'Alphabet Challenge:';
+        }
     } else if (gameMode === 'puremath') {
         positionDisplay.textContent = 'Solve the math problem:';
     }
@@ -730,11 +799,17 @@ function generateOptions(correctAnswer, optionType = 'position') {
 }
 
 function getTimeoutMessage() {
-    if (gameMode === 'position') {
-        return `⏱ TIME UP! ${currentLetter} is the ${getOrdinal(currentPosition)} letter`;
-    } else if (gameMode === 'opposite') {
-        const opposite = getOppositeLetter(currentLetter);
-        return `⏱ TIME UP! ${currentLetter} ↔ ${opposite}`;
+    if (gameMode === 'alphabet') {
+        const type = alphabetSettings.type === 'mixed' ? 'check' : alphabetSettings.type;
+        
+        if (type === 'position' || type === 'check') {
+            return `⏱ TIME UP! ${currentLetter} is the ${getOrdinal(currentPosition)} letter`;
+        } else if (type === 'opposite') {
+            const opposite = getOppositeLetter(currentLetter);
+            return `⏱ TIME UP! ${currentLetter} ↔ ${opposite}`;
+        } else {
+            return `⏱ TIME UP! Check the answer above`;
+        }
     } else {
         return `⏱ TIME UP! Check the answer above`;
     }
@@ -747,12 +822,22 @@ function generateNewQuestion() {
     updatePositionDisplayText();
     positionDisplay.style.color = '#63b3ed';
 
-    if (gameMode === 'position') {
-        generatePositionQuestion();
-    } else if (gameMode === 'opposite') {
-        generateOppositeQuestion();
-    } else if (gameMode === 'alphabetmath') {
-        generateAlphabetMathQuestion();
+    if (gameMode === 'alphabet') {
+        let questionType = alphabetSettings.type;
+        
+        // If mixed mode, randomly select a type
+        if (questionType === 'mixed') {
+            const types = ['position', 'opposite', 'alphabetmath'];
+            questionType = types[Math.floor(Math.random() * types.length)];
+        }
+        
+        if (questionType === 'position') {
+            generatePositionQuestion();
+        } else if (questionType === 'opposite') {
+            generateOppositeQuestion();
+        } else if (questionType === 'alphabetmath') {
+            generateAlphabetMathQuestion();
+        }
     } else if (gameMode === 'puremath') {
         generatePureMathQuestion();
     }
@@ -1027,7 +1112,7 @@ function handleOptionClick(e) {
 
         setTimeout(() => {
             if (!isGameOver) {
-                if (gameMode === 'alphabetmath') {
+                if (gameMode === 'alphabet' && alphabetSettings.type === 'alphabetmath') {
                     letterDisplay.style.fontSize = '28px';
                 } else if (gameMode === 'puremath') {
                     letterDisplay.style.fontSize = mathSettings.digits === 3 ? '32px' : '40px';
@@ -1052,7 +1137,7 @@ function handleOptionClick(e) {
 
         setTimeout(() => {
             if (!isGameOver) {
-                if (gameMode === 'alphabetmath') {
+                if (gameMode === 'alphabet' && alphabetSettings.type === 'alphabetmath') {
                     letterDisplay.style.fontSize = '28px';
                 } else if (gameMode === 'puremath') {
                     letterDisplay.style.fontSize = mathSettings.digits === 3 ? '32px' : '40px';
@@ -1066,26 +1151,37 @@ function handleOptionClick(e) {
 }
 
 function getCorrectMessage() {
-    if (gameMode === 'position') {
-        return `✓ CORRECT! ${currentLetter} is the ${getOrdinal(currentPosition)} letter`;
-    } else if (gameMode === 'opposite') {
-        const opposite = getOppositeLetter(currentLetter);
-        return `✓ CORRECT! ${currentLetter} ↔ ${opposite}`;
-    } else if (gameMode === 'alphabetmath') {
-        return `✓ CORRECT! Answer is ${currentLetter}(${currentPosition})`;
+    if (gameMode === 'alphabet') {
+        // Determine actual question type (important for mixed mode)
+        const isPositionQuestion = currentPosition && currentLetter && alphabet.indexOf(currentLetter) === currentPosition - 1;
+        const isOppositeQuestion = currentLetter && getOppositeLetter(currentLetter);
+        
+        if (alphabetSettings.type === 'position' || (alphabetSettings.type === 'mixed' && isPositionQuestion && !currentLetter.includes('('))) {
+            return `✓ CORRECT! ${currentLetter} is the ${getOrdinal(currentPosition)} letter`;
+        } else if (alphabetSettings.type === 'opposite' || (alphabetSettings.type === 'mixed' && !currentLetter.includes('('))) {
+            const opposite = getOppositeLetter(currentLetter);
+            return `✓ CORRECT! ${currentLetter} ↔ ${opposite}`;
+        } else {
+            return `✓ CORRECT! Answer is ${currentLetter}(${currentPosition})`;
+        }
     } else if (gameMode === 'puremath') {
         return `✓ CORRECT! Answer is ${currentPosition}`;
     }
 }
 
 function getIncorrectMessage() {
-    if (gameMode === 'position') {
-        return `✗ WRONG! ${currentLetter} is the ${getOrdinal(currentPosition)} letter`;
-    } else if (gameMode === 'opposite') {
-        const opposite = getOppositeLetter(currentLetter);
-        return `✗ WRONG! ${currentLetter} ↔ ${opposite}`;
-    } else if (gameMode === 'alphabetmath') {
-        return `✗ WRONG! Answer is ${currentLetter}(${currentPosition})`;
+    if (gameMode === 'alphabet') {
+        // Determine actual question type (important for mixed mode)
+        const isPositionQuestion = currentPosition && currentLetter && alphabet.indexOf(currentLetter) === currentPosition - 1;
+        
+        if (alphabetSettings.type === 'position' || (alphabetSettings.type === 'mixed' && isPositionQuestion && !currentLetter.includes('('))) {
+            return `✗ WRONG! ${currentLetter} is the ${getOrdinal(currentPosition)} letter`;
+        } else if (alphabetSettings.type === 'opposite' || (alphabetSettings.type === 'mixed' && !currentLetter.includes('('))) {
+            const opposite = getOppositeLetter(currentLetter);
+            return `✗ WRONG! ${currentLetter} ↔ ${opposite}`;
+        } else {
+            return `✗ WRONG! Answer is ${currentLetter}(${currentPosition})`;
+        }
     } else if (gameMode === 'puremath') {
         return `✗ WRONG! Answer is ${currentPosition}`;
     }
@@ -1135,3 +1231,5 @@ window.goHome = goHome;
 window.showMathSettings = showMathSettings;
 window.setMathOperation = setMathOperation;
 window.setMathDigits = setMathDigits;
+window.showAlphabetSettings = showAlphabetSettings;
+window.setAlphabetType = setAlphabetType;
