@@ -67,8 +67,36 @@ const observer = new IntersectionObserver((entries) => {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const headerNav = document.getElementById('headerNav');
+    
+    if (mobileMenuBtn && headerNav) {
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            headerNav.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = headerNav.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                headerNav.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!headerNav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                mobileMenuBtn.classList.remove('active');
+                headerNav.classList.remove('active');
+            }
+        });
+    }
+
     // Animate feature boxes on scroll
-    const featureBoxes = document.querySelectorAll('.feature-box');
+    const featureBoxes = document.querySelectorAll('.feature-box, .learning-card, .exam-box, .faq-box');
     featureBoxes.forEach((box, index) => {
         box.style.opacity = '0';
         box.style.transform = 'translateY(30px)';
@@ -101,109 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Add pixel trail effect (optional)
-let canCreateTrail = true;
-
-document.addEventListener('mousemove', (e) => {
-    if (!canCreateTrail) return;
-
-    canCreateTrail = false;
-
-    const trail = document.createElement('div');
-    trail.className = 'pixel-trail';
-    trail.style.left = e.pageX + 'px';
-    trail.style.top = e.pageY + 'px';
-
-    document.body.appendChild(trail);
-
-    setTimeout(() => {
-        trail.remove();
-    }, 500);
-
-    setTimeout(() => {
-        canCreateTrail = true;
-    }, 50);
-});
-
-// Add pixel trail styles
-if (!document.getElementById('pixel-trail-styles')) {
-    const style = document.createElement('style');
-    style.id = 'pixel-trail-styles';
-    style.textContent = `
-        .pixel-trail {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #ffd700;
-            pointer-events: none;
-            z-index: 9999;
-            animation: pixelTrailFade 0.5s ease-out forwards;
-            box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
-        }
-        
-        @keyframes pixelTrailFade {
-            to {
-                opacity: 0;
-                transform: scale(0);
-            }
-        }
-    `;
-    document.head.appendChild(style);
-}
-
-// ========================================
-// CAROUSEL FUNCTIONALITY
-// ========================================
-let currentSlide = 0;
-const totalSlides = 4;
-
-function moveCarousel(direction) {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('.dot');
-
-    // Remove active class from current slide
-    slides[currentSlide].classList.remove('active');
-    slides[currentSlide].classList.add('prev');
-    dots[currentSlide].classList.remove('active');
-
-    // Calculate new slide index
-    currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-
-    // Add active class to new slide
-    setTimeout(() => {
-        slides.forEach(slide => slide.classList.remove('prev'));
-        slides[currentSlide].classList.add('active');
-        dots[currentSlide].classList.add('active');
-    }, 100);
-}
-
-function jumpToSlide(index) {
-    const slides = document.querySelectorAll('.carousel-slide');
-    const dots = document.querySelectorAll('. dot');
-
-    // Remove active class from current slide
-    slides[currentSlide].classList.remove('active');
-    dots[currentSlide].classList.remove('active');
-
-    // Set new slide
-    currentSlide = index;
-
-    // Add active class to new slide
-    slides[currentSlide].classList.add('active');
-    dots[currentSlide].classList.add('active');
-}
-
-// Auto-rotate carousel every 5 seconds
-setInterval(() => {
-    moveCarousel(1);
-}, 5000);
-
-// ========================================
-// ANIMATED COUNTERS FOR METRICS
-// ========================================
+// Animated counters for metrics
 function animateCounter(element, target, duration = 2000) {
     const start = 0;
-    const increment = target / (duration / 16); // 60fps
+    const increment = target / (duration / 16);
     let current = start;
 
     const timer = setInterval(() => {
@@ -237,4 +166,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (metricsSection) {
         metricsObserver.observe(metricsSection);
     }
+});
+
+// Smooth scroll for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
 });

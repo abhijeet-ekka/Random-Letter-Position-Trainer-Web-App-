@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Letter Position Trainer</title>
-    <meta name="description"
-        content="Train your brain to instantly recognize letter positions. Retro pixel gaming experience!">
+    <title>Letter Trainer - Master Alphabet & Math for SSC, Banking & Railway Exams</title>
+    <meta name="description" content="Master alphabet positions and mental math for SSC CGL, Banking, Railway exams. Free interactive trainer with proven techniques.">
     <link rel="stylesheet" href="landing-styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +24,18 @@
                 <span class="logo-pixel">🎮</span>
                 <span class="logo-title">LETTER TRAINER</span>
             </div>
-            <a href="index.html" class="pixel-btn btn-play">PLAY NOW</a>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+                <span class="hamburger"></span>
+            </button>
+            <nav class="header-nav" id="headerNav">
+                <a href="#features" class="nav-link">FEATURES</a>
+                <a href="#learning" class="nav-link">LEARNING</a>
+                <a href="#exams" class="nav-link">EXAMS</a>
+                <a href="index.html" class="nav-link nav-cta">START FREE ▶</a>
+            </nav>
+            <a href="index.html" class="pixel-btn btn-play desktop-only">START FREE ▶</a>
         </div>
     </header>
 
@@ -34,26 +44,25 @@
         <div class="hero-container">
             <div class="hero-left">
                 <div class="insert-coin">
-                    <span class="coin-blink">★</span> PRESS START <span class="coin-blink">★</span>
+                    <span class="coin-blink">★</span> 100% FREE FOREVER <span class="coin-blink">★</span>
                 </div>
 
                 <h1 class="title-arcade">
-                    MASTER THE
-                    <span class="title-highlight">ALPHABET</span>
+                    ACE YOUR
+                    <span class="title-highlight">GOV EXAMS</span>
                 </h1>
 
                 <p class="hero-text">
-                    Train your brain to instantly identify letter positions. Challenge yourself with timed levels and
-                    become an alphabet expert!
+                    Master alphabet positions & mental math in minutes. Built specifically for SSC CGL, Banking, Railway & all competitive exams!
                 </p>
 
                 <div class="hero-buttons">
                     <a href="index.html" class="pixel-btn btn-start">
-                        ▶ START GAME
+                        ▶ START TRAINING
                     </a>
-                    <button class="pixel-btn btn-info" onclick="scrollToFeatures()">
-                        ℹ LEARN MORE
-                    </button>
+                    <a href="#learning" class="pixel-btn btn-info">
+                        📚 LEARN TRICKS
+                    </a>
                 </div>
 
                 <div class="arcade-stats">
@@ -62,12 +71,12 @@
                         <div class="stat-txt">LETTERS</div>
                     </div>
                     <div class="stat-pixel">
-                        <div class="stat-num">∞</div>
-                        <div class="stat-txt">LEVELS</div>
+                        <div class="stat-num">FREE</div>
+                        <div class="stat-txt">FOREVER</div>
                     </div>
                     <div class="stat-pixel">
-                        <div class="stat-num">★★★</div>
-                        <div class="stat-txt">FUN</div>
+                        <div class="stat-num">5MIN</div>
+                        <div class="stat-txt">DAILY</div>
                     </div>
                 </div>
             </div>
@@ -76,6 +85,7 @@
                 <div class="game-screen-preview">
                     <div class="screen-border">
                         <div class="screen-content">
+                            <div class="preview-timer">⏱ 10s</div>
                             <div class="preview-hearts">
                                 ❤️ ❤️ ❤️ ❤️ ❤️
                             </div>
@@ -98,180 +108,217 @@
     <section class="features-arcade" id="features">
         <div class="section-container">
             <div class="section-title-box">
-                <h2 class="section-title">GAME FEATURES</h2>
+                <h2 class="section-title">POWERFUL FEATURES</h2>
                 <div class="title-underline"></div>
+                <p class="section-desc">Everything you need to master reasoning sections</p>
             </div>
 
             <div class="features-grid-pixel">
                 <div class="feature-box">
                     <div class="feature-icon-pixel">🎯</div>
-                    <h3 class="feature-name">PROGRESSIVE LEVELS</h3>
-                    <p class="feature-desc">Start easy and level up through challenging stages</p>
+                    <h3 class="feature-name">MULTIPLE MODES</h3>
+                    <p class="feature-desc">Alphabet positions, opposites, letter math & pure mental math practice</p>
                 </div>
 
                 <div class="feature-box">
                     <div class="feature-icon-pixel">⏱️</div>
-                    <h3 class="feature-name">TIMED MODE</h3>
-                    <p class="feature-desc">Race against the clock to boost your speed</p>
+                    <h3 class="feature-name">EXAM TIMER</h3>
+                    <p class="feature-desc">Real exam pressure with progressive time limits to build speed</p>
                 </div>
 
                 <div class="feature-box">
                     <div class="feature-icon-pixel">📊</div>
-                    <h3 class="feature-name">TRACK STATS</h3>
-                    <p class="feature-desc">Monitor accuracy and average response time</p>
-                </div>
-
-                <div class="feature-box">
-                    <div class="feature-icon-pixel">🎨</div>
-                    <h3 class="feature-name">PIXEL ART</h3>
-                    <p class="feature-desc">Retro gaming aesthetic with vibrant colors</p>
+                    <h3 class="feature-name">PERFORMANCE TRACKING</h3>
+                    <p class="feature-desc">Track accuracy, speed, and improvement over time</p>
                 </div>
 
                 <div class="feature-box">
                     <div class="feature-icon-pixel">🧠</div>
-                    <h3 class="feature-name">LEARN TRICKS</h3>
-                    <p class="feature-desc">Master mnemonic techniques for memory</p>
+                    <h3 class="feature-name">PROVEN TECHNIQUES</h3>
+                    <p class="feature-desc">Learn EJOTY, anchor method, and mental math shortcuts</p>
                 </div>
 
                 <div class="feature-box">
-                    <div class="feature-icon-pixel">💪</div>
-                    <h3 class="feature-name">BRAIN POWER</h3>
-                    <p class="feature-desc">Build mental agility and quick thinking</p>
+                    <div class="feature-icon-pixel">📱</div>
+                    <h3 class="feature-name">MOBILE FRIENDLY</h3>
+                    <p class="feature-desc">Practice anywhere on phone, tablet, or computer</p>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon-pixel">💯</div>
+                    <h3 class="feature-name">100% FREE</h3>
+                    <p class="feature-desc">No hidden fees, no subscriptions, completely free forever</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Exam Prep Carousel Section -->
-    <section class="exam-carousel-section">
+    <!-- Learning Center Section -->
+    <section class="learning-center-section" id="learning">
         <div class="section-container">
             <div class="section-title-box">
-                <h2 class="section-title">PERFECT FOR EXAMS</h2>
+                <h2 class="section-title">LEARNING CENTER</h2>
                 <div class="title-underline"></div>
-                <p class="section-desc">Ace SSC CGL, Banking & All Competitive Exams</p>
+                <p class="section-desc">Master proven techniques used by toppers</p>
             </div>
 
-            <div class="carousel-container">
-                <div class="carousel-track" id="carouselTrack">
-                    <!-- Slide 1: SSC CGL -->
-                    <div class="carousel-slide active">
-                        <div class="exam-card">
-                            <div class="exam-badge">SSC CGL</div>
-                            <div class="exam-icon">📝</div>
-                            <h3 class="exam-title">SSC CGL PREPARATION</h3>
-                            <ul class="exam-benefits">
-                                <li>✓ Quick alphabet reasoning</li>
-                                <li>✓ Letter position questions</li>
-                                <li>✓ Series completion practice</li>
-                                <li>✓ Improve time management</li>
-                            </ul>
-                            <div class="exam-stat">Avg. 5-7 questions in exam</div>
-                        </div>
-                    </div>
+            <div class="learning-grid">
+                <!-- Alphabet Mastery -->
+                <div class="learning-card">
+                    <div class="learning-icon">🔤</div>
+                    <h3 class="learning-title">ALPHABET MASTERY</h3>
+                    <div class="learning-content">
+                        <h4 class="technique-head">1. EJOTY Method</h4>
+                        <p class="technique-text">
+                            Remember: <strong>"Every Jolly Old Tiger Yawns"</strong><br>
+                            E=5, J=10, O=15, T=20, Y=25<br>
+                            Use as stepping stones!
+                        </p>
 
-                    <!-- Slide 2: Banking -->
-                    <div class="carousel-slide">
-                        <div class="exam-card">
-                            <div class="exam-badge">BANKING</div>
-                            <div class="exam-icon">🏦</div>
-                            <h3 class="exam-title">BANK PO/CLERK EXAMS</h3>
-                            <ul class="exam-benefits">
-                                <li>✓ Reasoning ability boost</li>
-                                <li>✓ Alphabet test mastery</li>
-                                <li>✓ Coding-decoding prep</li>
-                                <li>✓ Mental calculation speed</li>
-                            </ul>
-                            <div class="exam-stat">Essential for reasoning section</div>
-                        </div>
-                    </div>
+                        <h4 class="technique-head">2. Opposite Formula</h4>
+                        <p class="technique-text">
+                            <strong>Position + Opposite = 27</strong><br>
+                            Find opposite of N(14): 27-14 = 13 → M<br>
+                            Works every time!
+                        </p>
 
-                    <!-- Slide 3: Railway -->
-                    <div class="carousel-slide">
-                        <div class="exam-card">
-                            <div class="exam-badge">RAILWAY</div>
-                            <div class="exam-icon">🚂</div>
-                            <h3 class="exam-title">RAILWAY EXAMS</h3>
-                            <ul class="exam-benefits">
-                                <li>✓ RRB NTPC preparation</li>
-                                <li>✓ Group D exam practice</li>
-                                <li>✓ Alphabet reasoning tricks</li>
-                                <li>✓ Fast calculation skills</li>
-                            </ul>
-                            <div class="exam-stat">Common in reasoning section</div>
-                        </div>
+                        <h4 class="technique-head">3. Quarter Chunks</h4>
+                        <p class="technique-text">
+                            Q1: A-G (1-7) | Q2: H-M (8-13)<br>
+                            Q3: N-S (14-19) | Q4: T-Z (20-26)<br>
+                            Know chunk, count within it
+                        </p>
                     </div>
-
-                    <!-- Slide 4: Other Exams -->
-                    <div class="carousel-slide">
-                        <div class="exam-card">
-                            <div class="exam-badge">ALL EXAMS</div>
-                            <div class="exam-icon">🎓</div>
-                            <h3 class="exam-title">OTHER GOV EXAMS</h3>
-                            <ul class="exam-benefits">
-                                <li>✓ UPSC preliminary prep</li>
-                                <li>✓ State PSC exams</li>
-                                <li>✓ Defence exams (NDA/CDS)</li>
-                                <li>✓ Teaching exams (CTET)</li>
-                            </ul>
-                            <div class="exam-stat">Universal skill builder</div>
-                        </div>
-                    </div>
+                    <a href="index.html" class="learning-btn">PRACTICE NOW →</a>
                 </div>
 
-                <!-- Carousel Controls -->
-                <div class="carousel-controls">
-                    <button class="carousel-btn carousel-prev" onclick="moveCarousel(-1)">◀</button>
-                    <div class="carousel-dots" id="carouselDots">
-                        <span class="dot active" onclick="jumpToSlide(0)"></span>
-                        <span class="dot" onclick="jumpToSlide(1)"></span>
-                        <span class="dot" onclick="jumpToSlide(2)"></span>
-                        <span class="dot" onclick="jumpToSlide(3)"></span>
+                <!-- Mental Math -->
+                <div class="learning-card">
+                    <div class="learning-icon">🧮</div>
+                    <h3 class="learning-title">MENTAL MATH</h3>
+                    <div class="learning-content">
+                        <h4 class="technique-head">Addition Tricks</h4>
+                        <p class="technique-text">
+                            <strong>Make 10s First:</strong> 8+7 = (8+2)+5 = 15<br>
+                            <strong>Left-to-Right:</strong> 47+36 = 70+13 = 83
+                        </p>
+
+                        <h4 class="technique-head">Multiplication Hacks</h4>
+                        <p class="technique-text">
+                            <strong>×11 Trick:</strong> 24×11 = 2_(2+4)_4 = 264<br>
+                            <strong>×5 Quick:</strong> Half it, then ×10
+                        </p>
+
+                        <h4 class="technique-head">Division Shortcuts</h4>
+                        <p class="technique-text">
+                            <strong>÷5:</strong> ×2 then ÷10<br>
+                            <strong>÷25:</strong> ×4 then ÷100
+                        </p>
                     </div>
-                    <button class="carousel-btn carousel-next" onclick="moveCarousel(1)">▶</button>
+                    <a href="index.html" class="learning-btn">PRACTICE NOW →</a>
+                </div>
+
+                <!-- Exam Tips -->
+                <div class="learning-card">
+                    <div class="learning-icon">⚡</div>
+                    <h3 class="learning-title">EXAM STRATEGY</h3>
+                    <div class="learning-content">
+                        <h4 class="technique-head">Speed Building</h4>
+                        <p class="technique-text">
+                            • Practice 10 min daily<br>
+                            • Start slow, build accuracy first<br>
+                            • Speed comes with repetition<br>
+                            • Use timer in practice
+                        </p>
+
+                        <h4 class="technique-head">Error Prevention</h4>
+                        <p class="technique-text">
+                            • Always estimate first<br>
+                            • Double-check middle steps<br>
+                            • Watch for carry-over mistakes<br>
+                            • Stay calm under pressure
+                        </p>
+
+                        <h4 class="technique-head">Exam Day Tips</h4>
+                        <p class="technique-text">
+                            • Solve easy questions first<br>
+                            • Don't spend >30s per question<br>
+                            • Mark difficult ones for review<br>
+                            • Trust your practice
+                        </p>
+                    </div>
+                    <a href="index.html" class="learning-btn">START TRAINING →</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- How to Play Section -->
-    <section class="howto-arcade">
+    <!-- Exam Prep Section -->
+    <section class="exam-section" id="exams">
         <div class="section-container">
             <div class="section-title-box">
-                <h2 class="section-title">HOW TO PLAY</h2>
+                <h2 class="section-title">PERFECT FOR ALL EXAMS</h2>
                 <div class="title-underline"></div>
+                <p class="section-desc">Master reasoning sections in SSC, Banking, Railway & more</p>
             </div>
 
-            <div class="steps-pixel">
-                <div class="step-box">
-                    <div class="step-badge">STEP 1</div>
-                    <h3 class="step-name">CHOOSE MODE</h3>
-                    <p class="step-info">Learn tricks or jump into gameplay</p>
+            <div class="exam-grid">
+                <div class="exam-box">
+                    <div class="exam-badge">SSC CGL</div>
+                    <div class="exam-icon">📝</div>
+                    <h3 class="exam-name">SSC CGL/CHSL</h3>
+                    <ul class="exam-points">
+                        <li>✓ 5-7 alphabet questions</li>
+                        <li>✓ Letter series & coding</li>
+                        <li>✓ Quick mental calculations</li>
+                        <li>✓ Time management crucial</li>
+                    </ul>
                 </div>
 
-                <div class="step-arrow">▶</div>
-
-                <div class="step-box">
-                    <div class="step-badge">STEP 2</div>
-                    <h3 class="step-name">ANSWER FAST</h3>
-                    <p class="step-info">Identify letter positions quickly</p>
+                <div class="exam-box">
+                    <div class="exam-badge">BANKING</div>
+                    <div class="exam-icon">🏦</div>
+                    <h3 class="exam-name">BANK PO/CLERK</h3>
+                    <ul class="exam-points">
+                        <li>✓ Reasoning ability boost</li>
+                        <li>✓ Alphabet test patterns</li>
+                        <li>✓ Coding-decoding prep</li>
+                        <li>✓ Mental math speed</li>
+                    </ul>
                 </div>
 
-                <div class="step-arrow">▶</div>
+                <div class="exam-box">
+                    <div class="exam-badge">RAILWAY</div>
+                    <div class="exam-icon">🚂</div>
+                    <h3 class="exam-name">RRB NTPC/GROUP D</h3>
+                    <ul class="exam-points">
+                        <li>✓ Common in reasoning</li>
+                        <li>✓ Letter position tricks</li>
+                        <li>✓ Fast calculation needed</li>
+                        <li>✓ Saves precious time</li>
+                    </ul>
+                </div>
 
-                <div class="step-box">
-                    <div class="step-badge">STEP 3</div>
-                    <h3 class="step-name">LEVEL UP</h3>
-                    <p class="step-info">Track stats and become an expert</p>
+                <div class="exam-box">
+                    <div class="exam-badge">OTHER EXAMS</div>
+                    <div class="exam-icon">🎓</div>
+                    <h3 class="exam-name">UPSC/STATE PSC</h3>
+                    <ul class="exam-points">
+                        <li>✓ UPSC preliminary prep</li>
+                        <li>✓ State PSC reasoning</li>
+                        <li>✓ Defence (NDA/CDS)</li>
+                        <li>✓ Teaching exams (CTET)</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Success Metrics Section -->
+    <!-- Success Metrics -->
     <section class="metrics-arcade">
         <div class="section-container">
             <div class="section-title-box">
-                <h2 class="section-title">SUCCESS BY NUMBERS</h2>
+                <h2 class="section-title">PROVEN RESULTS</h2>
                 <div class="title-underline"></div>
             </div>
 
@@ -279,7 +326,7 @@
                 <div class="metric-box">
                     <div class="metric-icon">👥</div>
                     <div class="metric-number" data-count="10000">0</div>
-                    <div class="metric-label">ACTIVE USERS</div>
+                    <div class="metric-label">ACTIVE LEARNERS</div>
                 </div>
 
                 <div class="metric-box">
@@ -291,130 +338,92 @@
                 <div class="metric-box">
                     <div class="metric-icon">⭐</div>
                     <div class="metric-number" data-count="95">0</div>
-                    <div class="metric-label">SUCCESS RATE %</div>
+                    <div class="metric-label">ACCURACY RATE %</div>
                 </div>
 
                 <div class="metric-box">
-                    <div class="metric-icon">🎯</div>
-                    <div class="metric-number" data-count="2500">0</div>
-                    <div class="metric-label">EXAMS CLEARED</div>
+                    <div class="metric-icon">⚡</div>
+                    <div class="metric-number" data-count="5">0</div>
+                    <div class="metric-label">MIN DAILY PRACTICE</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Testimonials Section -->
-    <section class="testimonials-arcade">
+    <!-- How It Works -->
+    <section class="howto-arcade">
         <div class="section-container">
             <div class="section-title-box">
-                <h2 class="section-title">SUCCESS STORIES</h2>
+                <h2 class="section-title">HOW IT WORKS</h2>
                 <div class="title-underline"></div>
-                <p class="section-desc">Real students, real results!</p>
             </div>
 
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-badge">SSC CGL CLEARED</div>
-                    <div class="testimonial-avatar">👨‍💼</div>
-                    <p class="testimonial-text">
-                        "This app helped me master alphabet reasoning in just 2 weeks. Cleared SSC CGL with 98 marks in
-                        reasoning!"
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-name">RAJESH KUMAR</div>
-                        <div class="author-exam">SSC CGL 2025</div>
-                    </div>
+            <div class="steps-pixel">
+                <div class="step-box">
+                    <div class="step-badge">STEP 1</div>
+                    <div class="step-icon">📚</div>
+                    <h3 class="step-name">LEARN</h3>
+                    <p class="step-info">Start with proven techniques or jump straight to practice</p>
                 </div>
 
-                <div class="testimonial-card">
-                    <div class="testimonial-badge">IBPS PO</div>
-                    <div class="testimonial-avatar">👩‍💼</div>
-                    <p class="testimonial-text">
-                        "The timed mode really improved my speed. Reasoning section became my strength thanks to this
-                        trainer!"
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-name">PRIYA SHARMA</div>
-                        <div class="author-exam">IBPS PO 2025</div>
-                    </div>
+                <div class="step-arrow">▶</div>
+
+                <div class="step-box">
+                    <div class="step-badge">STEP 2</div>
+                    <div class="step-icon">🎮</div>
+                    <h3 class="step-name">PRACTICE</h3>
+                    <p class="step-info">Progressive levels with timed questions like real exams</p>
                 </div>
 
-                <div class="testimonial-card">
-                    <div class="testimonial-badge">RAILWAY RRB</div>
-                    <div class="testimonial-avatar">👨‍🔧</div>
-                    <p class="testimonial-text">
-                        "Simple, effective, and fun! Practiced daily for 30 days and aced the alphabet section in RRB
-                        NTPC."
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-name">AMIT PATEL</div>
-                        <div class="author-exam">RRB NTPC 2025</div>
-                    </div>
+                <div class="step-arrow">▶</div>
+
+                <div class="step-box">
+                    <div class="step-badge">STEP 3</div>
+                    <div class="step-icon">📈</div>
+                    <h3 class="step-name">IMPROVE</h3>
+                    <p class="step-info">Track stats and watch your speed increase daily</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Blog Section -->
-    <section class="blog-arcade">
+    <!-- FAQ Section -->
+    <section class="faq-section">
         <div class="section-container">
             <div class="section-title-box">
-                <h2 class="section-title">LEARNING CORNER</h2>
+                <h2 class="section-title">COMMON QUESTIONS</h2>
                 <div class="title-underline"></div>
-                <p class="section-desc">Tips, tricks & strategies for exam success</p>
             </div>
 
-            <div class="blog-grid">
-                <div class="blog-card">
-                    <div class="blog-tag">STRATEGY</div>
-                    <div class="blog-icon">📚</div>
-                    <h3 class="blog-title">5 TRICKS TO MASTER ALPHABET POSITIONS</h3>
-                    <p class="blog-excerpt">
-                        Learn the EJOTY method and other mnemonic techniques to instantly recall letter positions...
-                    </p>
-                    <div class="blog-meta">
-                        <span class="blog-date">⏰ 5 MIN READ</span>
-                        <span class="blog-views">👁 2.5K VIEWS</span>
-                    </div>
+            <div class="faq-grid">
+                <div class="faq-box">
+                    <h3 class="faq-question">Is this really free?</h3>
+                    <p class="faq-answer">Yes! 100% free forever. No hidden charges, no premium plans. We built this to help exam candidates succeed.</p>
                 </div>
 
-                <div class="blog-card">
-                    <div class="blog-tag">EXAM PREP</div>
-                    <div class="blog-icon">🎯</div>
-                    <h3 class="blog-title">HOW TO SCORE 100% IN REASONING</h3>
-                    <p class="blog-excerpt">
-                        Complete guide to reasoning section preparation for SSC CGL, Banking, and Railway exams...
-                    </p>
-                    <div class="blog-meta">
-                        <span class="blog-date">⏰ 8 MIN READ</span>
-                        <span class="blog-views">👁 3.2K VIEWS</span>
-                    </div>
+                <div class="faq-box">
+                    <h3 class="faq-question">How long should I practice daily?</h3>
+                    <p class="faq-answer">Just 5-10 minutes daily is enough! Consistency beats long hours. Most students see improvement within a week.</p>
                 </div>
 
-                <div class="blog-card">
-                    <div class="blog-tag">PRACTICE</div>
-                    <div class="blog-icon">⚡</div>
-                    <h3 class="blog-title">30-DAY CHALLENGE: BECOME AN ALPHABET PRO</h3>
-                    <p class="blog-excerpt">
-                        Follow our structured 30-day practice plan to achieve mastery in alphabet reasoning...
-                    </p>
-                    <div class="blog-meta">
-                        <span class="blog-date">⏰ 10 MIN READ</span>
-                        <span class="blog-views">👁 4.8K VIEWS</span>
-                    </div>
+                <div class="faq-box">
+                    <h3 class="faq-question">Will this help in my exam?</h3>
+                    <p class="faq-answer">Absolutely! Alphabet questions appear in SSC CGL, Banking, Railway & most competitive exams. Mental math helps everywhere.</p>
                 </div>
 
-                <div class="blog-card">
-                    <div class="blog-tag">TIPS</div>
-                    <div class="blog-icon">💡</div>
-                    <h3 class="blog-title">COMMON MISTAKES & HOW TO AVOID THEM</h3>
-                    <p class="blog-excerpt">
-                        Learn from others' mistakes and avoid these common pitfalls in alphabet-based questions...
-                    </p>
-                    <div class="blog-meta">
-                        <span class="blog-date">⏰ 6 MIN READ</span>
-                        <span class="blog-views">👁 1.9K VIEWS</span>
-                    </div>
+                <div class="faq-box">
+                    <h3 class="faq-question">Do I need to create an account?</h3>
+                    <p class="faq-answer">No! Start practicing immediately. Your progress is saved locally on your device automatically.</p>
+                </div>
+
+                <div class="faq-box">
+                    <h3 class="faq-question">Works on mobile?</h3>
+                    <p class="faq-answer">Yes! Fully responsive. Practice on phone, tablet, or computer. Works offline too once loaded.</p>
+                </div>
+
+                <div class="faq-box">
+                    <h3 class="faq-question">Can I track my progress?</h3>
+                    <p class="faq-answer">Yes! See your accuracy, average time, high score, and improvement trends in your profile.</p>
                 </div>
             </div>
         </div>
@@ -423,12 +432,13 @@
     <!-- Final CTA -->
     <section class="cta-arcade">
         <div class="cta-box">
-            <div class="cta-flash">GAME READY</div>
-            <h2 class="cta-title">READY PLAYER ONE?</h2>
-            <p class="cta-subtitle">Start training your brain now!</p>
+            <div class="cta-flash">FREE FOREVER</div>
+            <h2 class="cta-title">START YOUR JOURNEY</h2>
+            <p class="cta-subtitle">Join thousands preparing for government exams!</p>
             <a href="index.html" class="pixel-btn btn-giant">
-                ▶ INSERT COIN TO START
+                ▶ START FREE TRAINING
             </a>
+            <p class="cta-note">No signup required • Practice immediately • 100% Free</p>
         </div>
     </section>
 
@@ -436,8 +446,13 @@
     <footer class="footer-arcade">
         <div class="footer-container">
             <div class="footer-logo">🎮 LETTER TRAINER</div>
-            <p class="footer-tagline">ENHANCE YOUR BRAIN POWER</p>
-            <p class="footer-copy">© 2026 PIXEL EDITION v2.0</p>
+            <p class="footer-tagline">Built for Indian Government Exam Aspirants</p>
+            <p class="footer-links">
+                <a href="index.html" class="footer-link">Start Practice</a> •
+                <a href="#learning" class="footer-link">Learning Center</a> •
+                <a href="#exams" class="footer-link">Exam Info</a>
+            </p>
+            <p class="footer-copy">© 2026 Letter Trainer • Made with ❤️ for exam aspirants</p>
         </div>
     </footer>
 
