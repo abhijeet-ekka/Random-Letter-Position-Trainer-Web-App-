@@ -22,6 +22,12 @@ let hasShownHighScoreNotification = false;
 // Game Mode: 'position', 'opposite', 'alphabetmath', 'puremath'
 let gameMode = 'position';
 
+// Math Mode Settings
+let mathSettings = {
+    operation: 'mixed', // 'addition', 'subtraction', 'multiplication', 'division', 'mixed'
+    digits: 1 // 1, 2, 3
+};
+
 // User Data State
 let userData = {
     username: 'Player',
@@ -50,7 +56,19 @@ function loadUserData() {
     }
 }
 
+function saveMathSettings() {
+    localStorage.setItem('letterTrainerMathSettings', JSON.stringify(mathSettings));
+}
+
+function loadMathSettings() {
+    const saved = localStorage.getItem('letterTrainerMathSettings');
+    if (saved) {
+        mathSettings = { ...mathSettings, ...JSON.parse(saved) };
+    }
+}
+
 loadUserData();
+loadMathSettings();
 
 const nextBtn = document.getElementById('nextBtn');
 const letterDisplay = document.getElementById('letterDisplay');
@@ -301,6 +319,67 @@ function getOrdinalSuffix(n) {
     return (s[(v - 20) % 10] || s[v] || s[0]);
 }
 
+function showMathSettings() {
+    menuContent.innerHTML = `
+        <div class="math-settings">
+            <div class="menu-title">MATH SETTINGS</div>
+            
+            <div class="settings-section">
+                <div class="settings-label">OPERATION TYPE</div>
+                <div class="settings-grid">
+                    <button class="settings-btn ${mathSettings.operation === 'addition' ? 'active' : ''}" onclick="setMathOperation('addition')">
+                        ➕ ADD
+                    </button>
+                    <button class="settings-btn ${mathSettings.operation === 'subtraction' ? 'active' : ''}" onclick="setMathOperation('subtraction')">
+                        ➖ SUB
+                    </button>
+                    <button class="settings-btn ${mathSettings.operation === 'multiplication' ? 'active' : ''}" onclick="setMathOperation('multiplication')">
+                        ✖️ MUL
+                    </button>
+                    <button class="settings-btn ${mathSettings.operation === 'division' ? 'active' : ''}" onclick="setMathOperation('division')">
+                        ➗ DIV
+                    </button>
+                    <button class="settings-btn ${mathSettings.operation === 'mixed' ? 'active' : ''}" onclick="setMathOperation('mixed')" style="grid-column: span 2;">
+                        🔀 MIXED
+                    </button>
+                </div>
+            </div>
+
+            <div class="settings-section">
+                <div class="settings-label">NUMBER OF DIGITS</div>
+                <div class="settings-grid">
+                    <button class="settings-btn ${mathSettings.digits === 1 ? 'active' : ''}" onclick="setMathDigits(1)">
+                        1 DIGIT
+                    </button>
+                    <button class="settings-btn ${mathSettings.digits === 2 ? 'active' : ''}" onclick="setMathDigits(2)">
+                        2 DIGITS
+                    </button>
+                    <button class="settings-btn ${mathSettings.digits === 3 ? 'active' : ''}" onclick="setMathDigits(3)">
+                        3 DIGITS
+                    </button>
+                </div>
+            </div>
+
+            <div class="menu-buttons" style="margin-top: 20px;">
+                <button class="menu-btn" onclick="showModeSelection()">⬅ BACK</button>
+                <button class="menu-btn secondary" onclick="selectGameMode('puremath')">▶️ START</button>
+            </div>
+        </div>
+    `;
+}
+
+function setMathOperation(operation) {
+    mathSettings.operation = operation;
+    saveMathSettings();
+    showMathSettings();
+}
+
+function setMathDigits(digits) {
+    mathSettings.digits = digits;
+    saveMathSettings();
+    showMathSettings();
+}
+
 function showModeSelection() {
     menuContent.innerHTML = `
         <div class="mode-selection">
@@ -327,11 +406,11 @@ function showModeSelection() {
                         Combine letters with math!
                     </div>
                 </div>
-                <div class="game-mode-card" onclick="selectGameMode('puremath')">
+                <div class="game-mode-card" onclick="showMathSettings()">
                     <div class="game-mode-title">🔢 MATH MODE</div>
                     <div class="game-mode-desc">
-                        Pure mental math: 15 + 7 = ?<br>
-                        Sharpen your calculation skills!
+                        Pure mental math with custom settings.<br>
+                        Choose operations & difficulty!
                     </div>
                 </div>
             </div>
@@ -792,32 +871,79 @@ function generateAlphabetMathQuestion() {
 
 function generatePureMathQuestion() {
     const operations = ['+', '-', '×', '÷'];
-    const operation = operations[Math.floor(Math.random() * operations.length)];
+    let operation;
+    
+    // Select operation based on settings
+    if (mathSettings.operation === 'mixed') {
+        operation = operations[Math.floor(Math.random() * operations.length)];
+    } else if (mathSettings.operation === 'addition') {
+        operation = '+';
+    } else if (mathSettings.operation === 'subtraction') {
+        operation = '-';
+    } else if (mathSettings.operation === 'multiplication') {
+        operation = '×';
+    } else if (mathSettings.operation === 'division') {
+        operation = '÷';
+    }
     
     let num1, num2, result;
+    const digits = mathSettings.digits;
+    
+    // Calculate ranges based on digit count
+    let minNum, maxNum;
+    if (digits === 1) {
+        minNum = 1;
+        maxNum = 9;
+    } else if (digits === 2) {
+        minNum = 10;
+        maxNum = 99;
+    } else if (digits === 3) {
+        minNum = 100;
+        maxNum = 999;
+    }
     
     if (operation === '+') {
-        num1 = Math.floor(Math.random() * 50) + 1;
-        num2 = Math.floor(Math.random() * 50) + 1;
+        num1 = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
+        num2 = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
         result = num1 + num2;
     } else if (operation === '-') {
-        num1 = Math.floor(Math.random() * 50) + 11;
-        num2 = Math.floor(Math.random() * (num1 - 1)) + 1;
+        num1 = Math.floor(Math.random() * (maxNum - minNum + 1)) + minNum;
+        num2 = Math.floor(Math.random() * (num1 - minNum)) + minNum;
         result = num1 - num2;
     } else if (operation === '×') {
-        num1 = Math.floor(Math.random() * 12) + 1;
-        num2 = Math.floor(Math.random() * 12) + 1;
+        if (digits === 1) {
+            num1 = Math.floor(Math.random() * 9) + 1;
+            num2 = Math.floor(Math.random() * 9) + 1;
+        } else if (digits === 2) {
+            num1 = Math.floor(Math.random() * 20) + 10;
+            num2 = Math.floor(Math.random() * 9) + 1;
+        } else {
+            num1 = Math.floor(Math.random() * 50) + 10;
+            num2 = Math.floor(Math.random() * 20) + 1;
+        }
         result = num1 * num2;
     } else { // ÷
-        const divisors = [2, 3, 4, 5, 6, 7, 8, 9, 10];
-        num2 = divisors[Math.floor(Math.random() * divisors.length)];
-        const multiple = Math.floor(Math.random() * 12) + 1;
-        num1 = num2 * multiple;
+        if (digits === 1) {
+            const divisors = [2, 3, 4, 5, 6, 7, 8, 9];
+            num2 = divisors[Math.floor(Math.random() * divisors.length)];
+            const multiple = Math.floor(Math.random() * 9) + 1;
+            num1 = num2 * multiple;
+        } else if (digits === 2) {
+            const divisors = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+            num2 = divisors[Math.floor(Math.random() * divisors.length)];
+            const multiple = Math.floor(Math.random() * 20) + 5;
+            num1 = num2 * multiple;
+        } else {
+            const divisors = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 15, 20, 25];
+            num2 = divisors[Math.floor(Math.random() * divisors.length)];
+            const multiple = Math.floor(Math.random() * 50) + 10;
+            num1 = num2 * multiple;
+        }
         result = num1 / num2;
     }
 
     letterDisplay.textContent = `${num1} ${operation} ${num2}`;
-    letterDisplay.style.fontSize = '40px';
+    letterDisplay.style.fontSize = digits === 3 ? '32px' : '40px';
     letterDisplay.style.animation = 'none';
     setTimeout(() => {
         letterDisplay.style.animation = 'letterPop 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
@@ -830,12 +956,14 @@ function generatePureMathQuestion() {
     const options = [];
     options.push(result);
     
+    const range = digits === 1 ? 10 : digits === 2 ? 50 : 100;
+    
     while (options.length < 4) {
         let wrongAnswer;
-        if (operation === '÷' || result < 20) {
-            wrongAnswer = Math.max(1, result + Math.floor(Math.random() * 10) - 5);
-        } else {
+        if (operation === '÷') {
             wrongAnswer = Math.max(1, result + Math.floor(Math.random() * 20) - 10);
+        } else {
+            wrongAnswer = Math.max(1, result + Math.floor(Math.random() * range) - (range / 2));
         }
         if (!options.includes(wrongAnswer)) {
             options.push(wrongAnswer);
@@ -902,7 +1030,7 @@ function handleOptionClick(e) {
                 if (gameMode === 'alphabetmath') {
                     letterDisplay.style.fontSize = '28px';
                 } else if (gameMode === 'puremath') {
-                    letterDisplay.style.fontSize = '40px';
+                    letterDisplay.style.fontSize = mathSettings.digits === 3 ? '32px' : '40px';
                 } else {
                     letterDisplay.style.fontSize = '72px';
                 }
@@ -927,7 +1055,7 @@ function handleOptionClick(e) {
                 if (gameMode === 'alphabetmath') {
                     letterDisplay.style.fontSize = '28px';
                 } else if (gameMode === 'puremath') {
-                    letterDisplay.style.fontSize = '40px';
+                    letterDisplay.style.fontSize = mathSettings.digits === 3 ? '32px' : '40px';
                 } else {
                     letterDisplay.style.fontSize = '72px';
                 }
@@ -1004,3 +1132,6 @@ window.saveProfileName = saveProfileName;
 window.showModeSelection = showModeSelection;
 window.selectGameMode = selectGameMode;
 window.goHome = goHome;
+window.showMathSettings = showMathSettings;
+window.setMathOperation = setMathOperation;
+window.setMathDigits = setMathDigits;

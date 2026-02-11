@@ -588,6 +588,68 @@ h1 {
     line-height: 1.6;
 }
 
+/* Math Settings */
+.math-settings {
+    text-align: center;
+}
+
+.settings-section {
+    margin-bottom: 25px;
+}
+
+.settings-label {
+    font-size: 12px;
+    color: #ffd700;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.settings-btn {
+    padding: 15px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 10px;
+    background: #4a5568;
+    color: #f7fafc;
+    border: 3px solid #718096;
+    cursor: pointer;
+    transition: all 0.1s;
+    box-shadow: 0 4px 0 #2d3748;
+}
+
+.settings-btn:hover {
+    background: #5a6578;
+    border-color: #63b3ed;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 #2d3748;
+}
+
+.settings-btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 #2d3748;
+}
+
+.settings-btn.active {
+    background: #4299e1;
+    border-color: #3182ce;
+    box-shadow: 0 4px 0 #2c5282;
+    color: #1a202c;
+}
+
+.settings-btn.active:hover {
+    background: #63b3ed;
+    box-shadow: 0 6px 0 #2c5282;
+}
+
+.settings-btn.active:active {
+    box-shadow: 0 2px 0 #2c5282;
+}
+
 /* Profile Screen */
 .profile-card {
     background: #2d3748;
