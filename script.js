@@ -268,63 +268,283 @@ function showLearnPage() {
 
     menuContent.innerHTML = `
         <div class="learn-page">
-            <h3 style="font-size: 20px; color: #ffd700; text-align: center; margin-bottom: 20px;">LEARN LETTER POSITIONS</h3>
+            <h3 style="font-size: 20px; color: #ffd700; text-align: center; margin-bottom: 20px;">📚 MASTER MENTAL MATH</h3>
+            
             <div class="learn-section">
-                <h3>📋 Complete Alphabet</h3>
+                <h3>🔤 ALPHABET MASTERY</h3>
+                
+                <div class="trick-box">
+                    <div class="trick-title">1. The Opposite Letter Formula</div>
+                    <div class="trick-content">
+                        <strong>Rule: Position + Opposite = 27</strong><br>
+                        A(1) + Z(26) = 27, B(2) + Y(25) = 27<br><br>
+                        <strong>Quick Find:</strong> To find opposite of N(14):<br>
+                        27 - 14 = 13 → M is opposite!<br><br>
+                        <strong>Practice:</strong> G(7) opposite? 27-7=20 → T
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">2. The Anchor Method</div>
+                    <div class="trick-content">
+                        <strong>Memorize these anchors:</strong><br>
+                        A=1, E=5, J=10, O=15, T=20, Z=26<br><br>
+                        <strong>Count from nearest:</strong><br>
+                        What's H? Nearest is E(5)...<br>
+                        F(6), G(7), H(8) ✓<br><br>
+                        What's R? Nearest is T(20)...<br>
+                        S(19), R(18) ✓
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">3. Chunk the Alphabet</div>
+                    <div class="trick-content">
+                        <strong>First Quarter (1-7):</strong> ABCDEFG<br>
+                        <strong>Second Quarter (8-13):</strong> HIJKLM<br>
+                        <strong>Third Quarter (14-19):</strong> NOPQRS<br>
+                        <strong>Fourth Quarter (20-26):</strong> TUVWXYZ<br><br>
+                        Know the chunk, count within it!
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">4. Multiples of 5 Trick</div>
+                    <div class="trick-content">
+                        <strong>EJOTY = 5, 10, 15, 20, 25</strong><br>
+                        Remember: "Every Jolly Old Tiger Yawns"<br><br>
+                        E(5), J(10), O(15), T(20), Y(25)<br>
+                        These are your stepping stones!
+                    </div>
+                </div>
+            </div>
+
+            <div class="learn-section">
+                <h3>➕ ADDITION MASTERY</h3>
+                
+                <div class="trick-box">
+                    <div class="trick-title">1. Make 10s First</div>
+                    <div class="trick-content">
+                        <strong>Break numbers to make 10:</strong><br>
+                        8 + 7 = ?<br>
+                        Think: 8 + (2+5) = (8+2) + 5 = 10 + 5 = 15<br><br>
+                        67 + 48 = ?<br>
+                        67 + 3 = 70, then 70 + 45 = 115<br><br>
+                        <strong>Always round to 10s, 100s!</strong>
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">2. Left-to-Right Addition</div>
+                    <div class="trick-content">
+                        <strong>Add biggest digits first:</strong><br>
+                        47 + 36 = ?<br>
+                        40 + 30 = 70<br>
+                        7 + 6 = 13<br>
+                        70 + 13 = 83 ✓<br><br>
+                        <strong>Faster than right-to-left!</strong>
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">3. Compensation Method</div>
+                    <div class="trick-content">
+                        <strong>Round up, then subtract:</strong><br>
+                        49 + 37 = ?<br>
+                        Think: 50 + 37 = 87<br>
+                        Then: 87 - 1 = 86 ✓<br><br>
+                        298 + 156 = ?<br>
+                        300 + 156 = 456, then 456 - 2 = 454
+                    </div>
+                </div>
+            </div>
+
+            <div class="learn-section">
+                <h3>➖ SUBTRACTION MASTERY</h3>
+                
+                <div class="trick-box">
+                    <div class="trick-title">1. Add-Up Method</div>
+                    <div class="trick-content">
+                        <strong>Count up instead of down:</strong><br>
+                        83 - 57 = ?<br>
+                        57 → 60 (+3)<br>
+                        60 → 80 (+20)<br>
+                        80 → 83 (+3)<br>
+                        Total: 3 + 20 + 3 = 26 ✓
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">2. Equal Addition</div>
+                    <div class="trick-content">
+                        <strong>Add same to both numbers:</strong><br>
+                        62 - 38 = ?<br>
+                        Add 2 to both: (62+2) - (38+2)<br>
+                        = 64 - 40 = 24 ✓<br><br>
+                        <strong>Make the subtractor easy!</strong>
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">3. Break It Down</div>
+                    <div class="trick-content">
+                        <strong>Subtract in parts:</strong><br>
+                        95 - 27 = ?<br>
+                        95 - 20 = 75<br>
+                        75 - 7 = 68 ✓<br><br>
+                        Break into 10s and 1s!
+                    </div>
+                </div>
+            </div>
+
+            <div class="learn-section">
+                <h3>✖️ MULTIPLICATION MASTERY</h3>
+                
+                <div class="trick-box">
+                    <div class="trick-title">1. The 9s Finger Trick</div>
+                    <div class="trick-content">
+                        <strong>9 × 7 = ?</strong><br>
+                        Hold up 10 fingers<br>
+                        Put down 7th finger<br>
+                        Left side: 6 fingers (tens)<br>
+                        Right side: 3 fingers (ones)<br>
+                        Answer: 63 ✓
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">2. Doubling Method</div>
+                    <div class="trick-content">
+                        <strong>Use repeated doubling:</strong><br>
+                        16 × 7 = ?<br>
+                        16 × 4 = 64 (double 16 twice)<br>
+                        16 × 2 = 32<br>
+                        16 × 1 = 16<br>
+                        64 + 32 + 16 = 112 ✓<br><br>
+                        <strong>Break into powers of 2!</strong>
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">3. The 11 Trick</div>
+                    <div class="trick-content">
+                        <strong>Two-digit × 11:</strong><br>
+                        24 × 11 = ?<br>
+                        Split: 2_4<br>
+                        Middle: 2+4 = 6<br>
+                        Answer: 264 ✓<br><br>
+                        73 × 11 = 7_(7+3)_3 = 803 ✓
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">4. Square Numbers Near 50</div>
+                    <div class="trick-content">
+                        <strong>Pattern for 50±n:</strong><br>
+                        52² = 25_(50-2)_(2²) = 2704<br>
+                        48² = 25_(50-2)_(2²) = 2304<br><br>
+                        <strong>Or use (50+n)(50-n):</strong><br>
+                        52 × 48 = (50+2)(50-2) = 2500-4 = 2496
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">5. The 5 Second Method</div>
+                    <div class="trick-content">
+                        <strong>Any number × 5:</strong><br>
+                        Half it, then × 10<br>
+                        24 × 5 = (24÷2) × 10 = 12 × 10 = 120<br><br>
+                        <strong>Or add half to the number:</strong><br>
+                        20 × 5 = 20 + 10 + 10 + 10 + 10 = 100<br>
+                        Think: 20 × 5 = (20 × 10) ÷ 2 = 100
+                    </div>
+                </div>
+            </div>
+
+            <div class="learn-section">
+                <h3>➗ DIVISION MASTERY</h3>
+                
+                <div class="trick-box">
+                    <div class="trick-title">1. Divisibility Rules</div>
+                    <div class="trick-content">
+                        <strong>Quick checks:</strong><br>
+                        ÷2: Last digit even<br>
+                        ÷3: Sum of digits ÷ by 3<br>
+                        ÷4: Last 2 digits ÷ by 4<br>
+                        ÷5: Ends in 0 or 5<br>
+                        ÷6: Even AND ÷ by 3<br>
+                        ÷8: Last 3 digits ÷ by 8<br>
+                        ÷9: Sum of digits ÷ by 9<br>
+                        ÷10: Ends in 0
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">2. Halving Method</div>
+                    <div class="trick-content">
+                        <strong>Divide by halving:</strong><br>
+                        84 ÷ 4 = ?<br>
+                        84 ÷ 2 = 42<br>
+                        42 ÷ 2 = 21 ✓<br><br>
+                        <strong>Great for 4, 8, 16!</strong>
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">3. Multiply to Divide</div>
+                    <div class="trick-content">
+                        <strong>÷5 = ×2, then ÷10:</strong><br>
+                        85 ÷ 5 = (85 × 2) ÷ 10 = 170 ÷ 10 = 17<br><br>
+                        <strong>÷25 = ×4, then ÷100:</strong><br>
+                        175 ÷ 25 = (175 × 4) ÷ 100 = 700 ÷ 100 = 7
+                    </div>
+                </div>
+            </div>
+
+            <div class="learn-section">
+                <h3>⚡ SPEED CALCULATION TIPS</h3>
+                
+                <div class="trick-box">
+                    <div class="trick-title">1. Estimate First</div>
+                    <div class="trick-content">
+                        <strong>Round to nearest 10/100:</strong><br>
+                        47 × 23 ≈ 50 × 20 = 1000<br>
+                        Actual will be close!<br><br>
+                        Helps catch mistakes instantly.
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">2. Work Left-to-Right</div>
+                    <div class="trick-content">
+                        <strong>Process big numbers first:</strong><br>
+                        Most significant → Least significant<br>
+                        Gives you answer faster<br>
+                        More natural for the brain!
+                    </div>
+                </div>
+
+                <div class="trick-box">
+                    <div class="trick-title">3. Practice Daily</div>
+                    <div class="trick-content">
+                        <strong>10 minutes = Big improvement</strong><br>
+                        • License plates: Add/multiply digits<br>
+                        • Receipts: Calculate totals mentally<br>
+                        • Clock: 24-hour → 12-hour conversions<br>
+                        • Prices: Calculate discounts (20% off)<br><br>
+                        <strong>Use this game daily!</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="learn-section">
+                <h3>📋 Quick Reference Chart</h3>
                 <div class="alphabet-grid">${alphabetItems}</div>
             </div>
-            <div class="learn-section">
-                <h3>🎯 Memory Tricks</h3>
-                <div class="trick-box">
-                    <div class="trick-title">1. Opposite Letter Trick</div>
-                    <div class="trick-content">
-                        A↔Z, B↔Y, C↔X, D↔W, etc.<br>
-                        Positions always add up to 27!
-                    </div>
-                </div>
-                <div class="trick-box">
-                    <div class="trick-title">2. Split in Half</div>
-                    <div class="trick-content">
-                        First half: A-M (1-13)<br>
-                        Second half: N-Z (14-26)
-                    </div>
-                </div>
-                <div class="trick-box">
-                    <div class="trick-title">3. Quarter Points</div>
-                    <div class="trick-content">
-                        A=1, G=7, M=13, S=19, Z=26<br>
-                        Use these as anchors!
-                    </div>
-                </div>
-                <div class="trick-box">
-                    <div class="trick-title">4. Common Patterns</div>
-                    <div class="trick-content">
-                        EJOTY: 5, 10, 15, 20, 25 (multiples of 5)
-                    </div>
-                </div>
-                <div class="trick-box">
-                    <div class="trick-title">5. Alphabet Math Tricks</div>
-                    <div class="trick-content">
-                        Work with letter positions:<br>
-                        A(1) + C(3) = D(4)<br>
-                        E(5) - B(2) = C(3)<br>
-                        B(2) × C(3) = F(6)<br>
-                        F(6) ÷ B(2) = C(3)
-                    </div>
-                </div>
-                <div class="trick-box">
-                    <div class="trick-title">6. Mental Math Practice</div>
-                    <div class="trick-content">
-                        Pure number calculations:<br>
-                        Quick addition, subtraction<br>
-                        Multiplication tables<br>
-                        Division practice
-                    </div>
-                </div>
-            </div>
+
             <div class="menu-buttons" style="margin-top: 20px;">
                 <button class="menu-btn" onclick="showStartScreen()">⬅ BACK</button>
-                <button class="menu-btn secondary" onclick="showModeSelection()">🎮 PLAY NOW</button>
+                <button class="menu-btn secondary" onclick="showModeSelection()">🎮 PRACTICE NOW</button>
             </div>
         </div>
     `;
