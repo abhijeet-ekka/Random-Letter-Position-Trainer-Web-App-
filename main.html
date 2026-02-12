@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Game - ExamArcade | Alphabet & Math Trainer</title>
+    <meta name="description" content="Practice alphabet positions and mental math for SSC CGL, Banking, Railway exams. Free interactive training tool by ExamArcade.">
+    <meta name="keywords" content="alphabet practice, mental math practice, ssc cgl practice, reasoning practice, examarcade">
+    <link rel="canonical" href="https://examarcade.in/practice">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container hidden" id="gameContainer">
+        <h1>EXAMARCADE</h1>
+        <p class="subtitle">PRACTICE TRAINER v3.0</p>
+
+        <div class="game-header">
+            <div class="level-display">
+                LEVEL <span class="level-number" id="levelDisplay">1</span>
+            </div>
+            <div class="mode-badge" id="modeBadge">POSITION</div>
+            <div class="hearts-container" id="heartsContainer">
+                <span class="heart">❤️</span>
+                <span class="heart">❤️</span>
+                <span class="heart">❤️</span>
+                <span class="heart">❤️</span>
+                <span class="heart">❤️</span>
+            </div>
+            <div class="header-buttons">
+                <button class="music-btn" id="musicBtn" title="Toggle Music">🔊</button>
+                <button class="home-btn" id="homeBtn" title="Go to Landing Page">🏠</button>
+                <button class="pause-btn" id="pauseBtn">PAUSE</button>
+            </div>
+        </div>
+
+        <div class="game-screen">
+            <div class="timer-display" id="timerDisplay">10</div>
+            <div class="particles" id="particles"></div>
+            <div class="position-display" id="positionDisplay">What position is this letter?</div>
+            <div class="letter-display" id="letterDisplay">?</div>
+            <div class="answer-display" id="answerDisplay"></div>
+        </div>
+
+        <div class="controls">
+            <div class="options" id="optionsContainer">
+                <button class="option-btn" data-position="1">1st</button>
+                <button class="option-btn" data-position="2">2nd</button>
+                <button class="option-btn" data-position="3">3rd</button>
+                <button class="option-btn" data-position="4">4th</button>
+            </div>
+
+            <button class="btn-generate" id="nextBtn">NEXT QUESTION</button>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-label">CORRECT</div>
+                <div class="stat-value" id="correctCount" style="color: #68d391;">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">INCORRECT</div>
+                <div class="stat-value" id="incorrectCount" style="color: #fc8181;">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">HIGH SCORE</div>
+                <div class="stat-value" id="highestScoreDisplay" style="color: #ffd700;">0</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">AVG TIME</div>
+                <div class="stat-value" id="avgTime" style="color: #63b3ed;">--</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu-overlay active" id="menuOverlay">
+        <div class="menu-content" id="menuContent">
+            <div class="mode-selection">
+                <div class="menu-title">SELECT PRACTICE MODE</div>
+                <div class="mode-grid">
+                    <div class="game-mode-card" onclick="showAlphabetSettings()">
+                        <div class="game-mode-title">🔤 ALPHABET MODE</div>
+                        <div class="game-mode-desc">
+                            Master letter positions, opposites, and letter math!<br>
+                            Perfect for SSC CGL, Banking & Railway reasoning sections
+                        </div>
+                    </div>
+                    <div class="game-mode-card" onclick="showMathSettings()">
+                        <div class="game-mode-title">🔢 MATH MODE</div>
+                        <div class="game-mode-desc">
+                            Pure mental math with custom settings.<br>
+                            Build calculation speed for all competitive exams
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-buttons" style="margin-top: 20px;">
+                    <button class="menu-btn" onclick="showLearnPage()">📚 LEARN TRICKS</button>
+                    <button class="menu-btn" onclick="showProfile()">👤 PROFILE</button>
+                    <a href="index.html" class="menu-btn tertiary">🏠 BACK TO HOME</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="bgMusic" loop preload="auto">
+        <source src="https://assets.mixkit.co/music/preview/mixkit-game-level-music-689.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="correctSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-video-game-win-2016.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="wrongSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-player-losing-or-failing-2042.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="levelUpSound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
