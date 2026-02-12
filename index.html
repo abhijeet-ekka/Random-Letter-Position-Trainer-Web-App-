@@ -4,15 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Letter Trainer - Practice Game</title>
-    <meta name="description" content="Practice alphabet positions and mental math for government exams">
+    <title>Practice Game - ExamArcade | Alphabet & Math Trainer</title>
+    <meta name="description" content="Practice alphabet positions and mental math for SSC CGL, Banking, Railway exams. Free interactive training tool by ExamArcade.">
+    <meta name="keywords" content="alphabet practice, mental math practice, ssc cgl practice, reasoning practice, examarcade">
+    <link rel="canonical" href="https://examarcade.in/practice">
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
     <div class="container hidden" id="gameContainer">
-        <h1>LETTER TRAINER</h1>
-        <p class="subtitle">PIXEL EDITION v3.0</p>
+        <h1>EXAMARCADE</h1>
+        <p class="subtitle">PRACTICE TRAINER v3.0</p>
 
         <div class="game-header">
             <div class="level-display">
@@ -74,14 +76,28 @@
 
     <div class="menu-overlay active" id="menuOverlay">
         <div class="menu-content" id="menuContent">
-            <div class="start-screen">
-                <div class="start-title">LETTER TRAINER</div>
-                <div class="start-subtitle">PIXEL EDITION v3.0</div>
-                <div class="mode-buttons">
-                    <button class="mode-btn" onclick="showLearnPage()">📚 LEARN TRICKS</button>
-                    <button class="mode-btn" onclick="showProfile()">👤 PROFILE</button>
-                    <button class="mode-btn secondary" onclick="showModeSelection()">🎮 PLAY GAME</button>
-                    <a href="landing.html" class="mode-btn tertiary">🏠 MAIN PAGE</a>
+            <div class="mode-selection">
+                <div class="menu-title">SELECT PRACTICE MODE</div>
+                <div class="mode-grid">
+                    <div class="game-mode-card" onclick="showAlphabetSettings()">
+                        <div class="game-mode-title">🔤 ALPHABET MODE</div>
+                        <div class="game-mode-desc">
+                            Master letter positions, opposites, and letter math!<br>
+                            Perfect for SSC CGL, Banking & Railway reasoning sections
+                        </div>
+                    </div>
+                    <div class="game-mode-card" onclick="showMathSettings()">
+                        <div class="game-mode-title">🔢 MATH MODE</div>
+                        <div class="game-mode-desc">
+                            Pure mental math with custom settings.<br>
+                            Build calculation speed for all competitive exams
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-buttons" style="margin-top: 20px;">
+                    <button class="menu-btn" onclick="showLearnPage()">📚 LEARN TRICKS</button>
+                    <button class="menu-btn" onclick="showProfile()">👤 PROFILE</button>
+                    <a href="landing.html" class="menu-btn tertiary">🏠 BACK TO HOME</a>
                 </div>
             </div>
         </div>

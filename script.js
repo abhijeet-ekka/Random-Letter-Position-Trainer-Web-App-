@@ -2103,7 +2103,7 @@ function selectGameMode(mode) {
 function showStartScreen() {
     menuContent.innerHTML = `
         <div class="start-screen">
-            <div class="start-title">LETTER TRAINER</div>
+            <div class="start-title">Letter Trainer</div>
             <div class="start-subtitle">PIXEL EDITION v3.0</div>
             <div class="mode-buttons">
                 <button class="mode-btn" onclick="showLearnPage()">📚 LEARN TRICKS</button>
