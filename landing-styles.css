@@ -119,6 +119,11 @@ body {
     white-space: nowrap;
 }
 
+.logo-title img {
+    height: 40px;
+    width: auto;
+}
+
 /* Mobile Menu Button */
 .mobile-menu-btn {
     display: none;
@@ -167,7 +172,8 @@ body {
     white-space: nowrap;
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link.active {
     color: #ffd700;
 }
 
@@ -182,7 +188,8 @@ body {
     transition: width 0.3s;
 }
 
-.nav-link:hover::after {
+.nav-link:hover::after,
+.nav-link.active::after {
     width: 100%;
 }
 

@@ -43,6 +43,13 @@ let userData = {
     highScore: 0
 };
 
+// Leaderboard Data
+let leaderboardData = {
+    alphabet: [],
+    math: [],
+    overall: []
+};
+
 function saveUserData() {
     localStorage.setItem('letterTrainerData', JSON.stringify(userData));
 }
@@ -83,9 +90,58 @@ function loadAlphabetSettings() {
     }
 }
 
+// Leaderboard Functions
+function loadLeaderboard() {
+    const saved = localStorage.getItem('examArcadeLeaderboard');
+    if (saved) {
+        leaderboardData = JSON.parse(saved);
+    }
+}
+
+function saveLeaderboard() {
+    localStorage.setItem('examArcadeLeaderboard', JSON.stringify(leaderboardData));
+}
+
+function addToLeaderboard(score, mode) {
+    const entry = {
+        username: userData.username,
+        score: score,
+        level: level,
+        accuracy: totalAnswers > 0 ? ((correctCount / totalAnswers) * 100).toFixed(1) : 0,
+        date: new Date().toISOString()
+    };
+
+    // Add to mode-specific leaderboard
+    if (!leaderboardData[mode]) {
+        leaderboardData[mode] = [];
+    }
+    leaderboardData[mode].push(entry);
+    leaderboardData[mode].sort((a, b) => b.score - a.score);
+    leaderboardData[mode] = leaderboardData[mode].slice(0, 20); // Keep top 20
+
+    // Add to overall leaderboard
+    leaderboardData.overall.push(entry);
+    leaderboardData.overall.sort((a, b) => b.score - a.score);
+    leaderboardData.overall = leaderboardData.overall.slice(0, 20); // Keep top 20
+
+    saveLeaderboard();
+}
+
+function getLeaderboard(mode = 'overall') {
+    loadLeaderboard();
+    return leaderboardData[mode] || [];
+}
+
+function getUserRank(mode = 'overall') {
+    const board = getLeaderboard(mode);
+    const userEntry = board.findIndex(entry => entry.username === userData.username);
+    return userEntry !== -1 ? userEntry + 1 : null;
+}
+
 loadUserData();
 loadMathSettings();
 loadAlphabetSettings();
+loadLeaderboard();
 
 const nextBtn = document.getElementById('nextBtn');
 const letterDisplay = document.getElementById('letterDisplay');
@@ -106,6 +162,7 @@ const optionsContainer = document.getElementById('optionsContainer');
 const highestScoreDisplay = document.getElementById('highestScoreDisplay');
 const musicBtn = document.getElementById('musicBtn');
 const homeBtn = document.getElementById('homeBtn');
+const leaderboardBtn = document.getElementById('leaderboardBtn');
 const modeBadge = document.getElementById('modeBadge');
 
 const bgMusic = document.getElementById('bgMusic');
@@ -229,6 +286,75 @@ function saveProfileName() {
     }
 }
 
+// Leaderboard UI Functions
+function showLeaderboard() {
+    const overallBoard = getLeaderboard('overall');
+    const alphabetBoard = getLeaderboard('alphabet');
+    const mathBoard = getLeaderboard('math');
+    
+    const userOverallRank = getUserRank('overall');
+
+    menuContent.innerHTML = `
+        <div class="leaderboard-card">
+            <div class="leaderboard-header">
+                <div class="leaderboard-icon">🏆</div>
+                <div class="leaderboard-title">LEADERBOARD</div>
+            </div>
+            
+            ${userOverallRank ? `
+            <div class="leaderboard-user-rank">
+                <div class="leaderboard-user-rank-title">YOUR RANK</div>
+                <div class="leaderboard-user-rank-value">#${userOverallRank}</div>
+            </div>
+            ` : ''}
+            
+            <div class="leaderboard-tabs">
+                <button class="leaderboard-tab active" onclick="showLeaderboardTab('overall')">OVERALL</button>
+                <button class="leaderboard-tab" onclick="showLeaderboardTab('alphabet')">ALPHABET</button>
+                <button class="leaderboard-tab" onclick="showLeaderboardTab('math')">MATH</button>
+            </div>
+            
+            <div id="leaderboardContent">
+                ${renderLeaderboardList(overallBoard)}
+            </div>
+            
+            <button class="menu-btn" onclick="showStartScreen()">⬅ BACK</button>
+        </div>
+    `;
+    menuOverlay.classList.add('active');
+}
+
+function renderLeaderboardList(board) {
+    if (board.length === 0) {
+        return `<div class="leaderboard-empty">No scores yet. Start playing to appear on the leaderboard!</div>`;
+    }
+    
+    return `
+        <div class="leaderboard-list">
+            ${board.map((entry, index) => `
+                <div class="leaderboard-item">
+                    <div class="leaderboard-rank ${index < 3 ? 'top-' + (index + 1) : ''}">${index + 1}</div>
+                    <div class="leaderboard-avatar">👤</div>
+                    <div class="leaderboard-info">
+                        <div class="leaderboard-name">${entry.username}</div>
+                        <div class="leaderboard-stats">Level ${entry.level} • ${entry.accuracy}% accuracy</div>
+                    </div>
+                    <div class="leaderboard-score">${entry.score}</div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+}
+
+function showLeaderboardTab(mode) {
+    const tabs = document.querySelectorAll('.leaderboard-tab');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    const board = getLeaderboard(mode);
+    document.getElementById('leaderboardContent').innerHTML = renderLeaderboardList(board);
+}
+
 function showHighScoreBeatNotification() {
     const notification = document.createElement('div');
     notification.className = 'high-score-notification';
@@ -267,6 +393,7 @@ function showStartScreen() {
             <div class="mode-buttons">
                 <button class="mode-btn secondary" onclick="showModeSelection()">🎮 PLAY GAME</button>
                 <button class="mode-btn" onclick="showProfile()">👤 PROFILE</button>
+                <button class="mode-btn" onclick="showLeaderboard()">🏆 LEADERBOARD</button>
                 <a href="index.html" class="mode-btn" style="text-decoration: none; display: block;">🏠 BACK TO HOME</a>
             </div>
         </div>
@@ -286,6 +413,9 @@ document.addEventListener('DOMContentLoaded', () => {
     } else if (page === 'profile') {
         // Show profile directly
         showProfile();
+    } else if (page === 'leaderboard') {
+        // Show leaderboard directly
+        showLeaderboard();
     } else {
         // Default: show start screen
         showStartScreen();
@@ -404,6 +534,10 @@ function gameOver() {
         highestScore = correctCount;
         isNewHighScore = true;
     }
+    
+    // Add to leaderboard
+    addToLeaderboard(correctCount, gameMode);
+    
     saveUserData();
 
     menuContent.innerHTML = `
@@ -434,6 +568,7 @@ function gameOver() {
             </div>
             <div class="menu-buttons">
                 <button class="menu-btn secondary" onclick="restartGame()">PLAY AGAIN</button>
+                <button class="menu-btn" onclick="showLeaderboard()">🏆 LEADERBOARD</button>
                 <button class="menu-btn" onclick="showModeSelection()">CHANGE MODE</button>
                 <button class="menu-btn restart" onclick="goHome()">MAIN MENU</button>
             </div>
@@ -474,6 +609,7 @@ function togglePause() {
             </div>
             <div class="menu-buttons">
                 <button class="menu-btn secondary" onclick="togglePause()">RESUME</button>
+                <button class="menu-btn" onclick="showLeaderboard()">🏆 LEADERBOARD</button>
                 <button class="menu-btn restart" onclick="restartGame()">RESTART</button>
             </div>
         `;
@@ -1116,6 +1252,7 @@ optionsContainer.addEventListener('click', (e) => {
 pauseBtn.addEventListener('click', togglePause);
 musicBtn.addEventListener('click', toggleMusic);
 homeBtn.addEventListener('click', goHome);
+if (leaderboardBtn) leaderboardBtn.addEventListener('click', showLeaderboard);
 
 nextBtn.addEventListener('click', () => {
     if (answered && !isGameOver) {
@@ -1155,3 +1292,5 @@ window.setMathDigits = setMathDigits;
 window.showAlphabetSettings = showAlphabetSettings;
 window.setAlphabetType = setAlphabetType;
 window.showStartScreen = showStartScreen;
+window.showLeaderboard = showLeaderboard;
+window.showLeaderboardTab = showLeaderboardTab;
