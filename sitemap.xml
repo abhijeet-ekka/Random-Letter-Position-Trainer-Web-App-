@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <!-- Home/Blog Landing Page -->
+    <url>
+        <loc>https://examarcade.in/</loc>
+        <lastmod>2026-02-13</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://examarcade.in/assets/fevicon/favicon-96x96.png</image:loc>
+            <image:title>ExamArcade Logo</image:title>
+            <image:caption>Free Exam Preparation Platform for SSC CGL, Banking, and Railway Exams</image:caption>
+        </image:image>
+    </url>
+
+    <!-- Practice Game Page -->
+    <url>
+        <loc>https://examarcade.in/practice.html</loc>
+        <lastmod>2026-02-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Blog Article: Alphabet Tricks -->
+    <url>
+        <loc>https://examarcade.in/alphabet-tricks.html</loc>
+        <lastmod>2026-02-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Article: EJOTY Method -->
+    <url>
+        <loc>https://examarcade.in/ejoty-method.html</loc>
+        <lastmod>2026-02-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Blog Article: Vedic Math -->
+    <url>
+        <loc>https://examarcade.in/vedic-math.html</loc>
+        <lastmod>2026-02-13</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+</urlset>

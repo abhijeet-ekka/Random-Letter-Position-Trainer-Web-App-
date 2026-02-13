@@ -1,0 +1,15 @@
+# ExamArcade Robots.txt
+# This file tells search engines which pages to crawl
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://examarcade.in/sitemap.xml
+
+# Crawl-delay (optional - helps prevent server overload)
+Crawl-delay: 10
+
+# Disallow specific files/folders if needed (currently allowing all)
+# Disallow: /assets/
+# Disallow: /admin/
