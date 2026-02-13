@@ -7,7 +7,7 @@
 
     <!-- Home/Blog Landing Page -->
     <url>
-        <loc>https://examarcade.in/</loc>
+        <loc>https://www.examarcade.in//</loc>
         <lastmod>2026-02-13</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
@@ -20,7 +20,7 @@
 
     <!-- Practice Game Page -->
     <url>
-        <loc>https://examarcade.in/practice.html</loc>
+        <loc>https://www.examarcade.in/practice</loc>
         <lastmod>2026-02-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.9</priority>
@@ -28,7 +28,7 @@
 
     <!-- Blog Article: Alphabet Tricks -->
     <url>
-        <loc>https://examarcade.in/alphabet-tricks.html</loc>
+        <loc>https://www.examarcade.in/blog/alphabet-tricks.html</loc>
         <lastmod>2026-02-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -36,7 +36,7 @@
 
     <!-- Blog Article: EJOTY Method -->
     <url>
-        <loc>https://examarcade.in/ejoty-method.html</loc>
+        <loc>https://www.examarcade.in/blog/ejoty-method.html</loc>
         <lastmod>2026-02-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
@@ -44,7 +44,7 @@
 
     <!-- Blog Article: Vedic Math -->
     <url>
-        <loc>https://examarcade.in/vedic-math.html</loc>
+        <loc>https://www.examarcade.in/blog/vedic-math.html</loc>
         <lastmod>2026-02-13</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
