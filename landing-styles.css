@@ -1339,6 +1339,8 @@ body {
     }
 }
 
+
+
 /* Focus styles for accessibility */
 *:focus-visible {
     outline: 3px solid #ffd700;
